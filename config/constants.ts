@@ -60,7 +60,27 @@ export type ValidSkills =
   | "FastAPI"
   | "SQL"
   | "NoSQL"
-  | "Framer Motion";
+  | "Framer Motion"
+  | "C++"
+  | "C#"
+  | "PL/SQL"
+  | "UI/UX Design"
+  | "Adobe Illustrator"
+  | "Photoshop"
+  | "InDesign"
+  | "Flutter"
+  | "Dart"
+  | "Mongoose"
+  | "JWT"
+  | "Tesseract.js"
+  | "Vite"
+  | "React Router"
+  | "scikit-learn"
+  | "pandas"
+  | "Jupyter"
+  | "GridFS"
+  | "Unity"
+  | "Google Gemini";
 
 export type ValidCategory =
   | "Full Stack"
@@ -69,9 +89,19 @@ export type ValidCategory =
   | "UI/UX"
   | "Web Dev"
   | "Mobile Dev"
-  | "3D Modeling";
+  | "3D Modeling"
+  | "Branding"
+  | "Audiovisual"
+  | "Video/Photo Editing"
+  | "AI/ML"
+  | "Game Dev"
+  | "Print Design";
 
 export type ValidExpType = "Personal" | "Professional";
+
+// Top-level split used by the Projects page to separate code-based work
+// (web/mobile/game dev) from design & multimedia work.
+export type ValidPortfolioCategory = "development" | "creative";
 
 export type ValidPages =
   | "home"
@@ -79,5 +109,4 @@ export type ValidPages =
   | "projects"
   | "experience"
   | "contact"
-  | "contributions"
   | "resume";

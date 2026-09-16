@@ -10,26 +10,32 @@ interface SocialInterface {
 export const SocialLinks: SocialInterface[] = [
   {
     name: "Github",
-    username: "@namanbarkiya",
+    // TODO: add your GitHub username.
+    username: "your-username",
     icon: Icons.gitHub,
-    link: "https://github.com/namanbarkiya",
+    // TODO: add your GitHub profile URL.
+    link: "#",
   },
   {
     name: "LinkedIn",
-    username: "Naman Barkiya",
+    // TODO: add your LinkedIn display name.
+    username: "Elissa Issa",
     icon: Icons.linkedin,
-    link: "https://www.linkedin.com/in/namanbarkiya",
+    // TODO: add your LinkedIn profile URL.
+    link: "#",
   },
   {
-    name: "Twitter",
-    username: "@namanbarkiya",
-    icon: Icons.twitter,
-    link: "https://twitter.com/namanbarkiya",
+    name: "TikTok",
+    // TODO: add your TikTok username.
+    username: "yourusername",
+    icon: Icons.tiktok,
+    // TODO: replace with your real TikTok profile URL.
+    link: "https://tiktok.com/@yourusername",
   },
   {
     name: "Gmail",
-    username: "naman.barkiya02",
+    username: "elissaissa4",
     icon: Icons.gmail,
-    link: "mailto:naman.barkiya02@gmail.com",
+    link: "mailto:elissaissa4@gmail.com",
   },
 ];

@@ -10,15 +10,22 @@ import CustomTooltip from "@/components/ui/custom-tooltip";
 import { Projects } from "@/config/projects";
 import { siteConfig } from "@/config/site";
 import { cn, formatDateFromObj } from "@/lib/utils";
-import profileImg from "@/public/profile-img.jpg";
+
+// Placeholder initials avatar — swap back to a real <Image> using your own
+// public/profile-img.jpg once you have one; the template's photo was removed
+// since it belonged to the original author, not you.
+const authorInitials = siteConfig.authorName
+  .split(" ")
+  .map((part) => part[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
 
 interface ProjectPageProps {
   params: {
     projectId: string;
   };
 }
-
-const githubUsername = "namanbarkiya";
 
 export default function Project({ params }: ProjectPageProps) {
   let project = Projects.find((val) => val.id === params.projectId);
@@ -70,16 +77,17 @@ export default function Project({ params }: ProjectPageProps) {
             href={siteConfig.links.github}
             className="flex items-center space-x-2 text-sm"
           >
-            <Image
-              src={profileImg}
-              alt={"naman"}
-              width={42}
-              height={42}
-              className="rounded-full bg-background"
-            />
+            <div
+              className="w-[42px] h-[42px] rounded-full bg-primary flex items-center justify-center flex-shrink-0"
+              aria-hidden="true"
+            >
+              <span className="font-heading text-sm text-primary-foreground">
+                {authorInitials}
+              </span>
+            </div>
 
             <div className="flex-1 text-left leading-tight">
-              <p className="font-medium">{"Naman Barkiya"}</p>
+              <p className="font-medium">{siteConfig.authorName}</p>
               <p className="text-[12px] text-muted-foreground">
                 @{siteConfig.username}
               </p>
@@ -126,17 +134,45 @@ export default function Project({ params }: ProjectPageProps) {
             </h3>
             <div>
               <p>{page.description}</p>
-              {page.imgArr.map((img, ind) => (
-                <Image
-                  src={img}
+{page.imgArr && page.imgArr.length > 0 && (
+                <div className="my-4 flex flex-row gap-4 overflow-x-auto pb-2">
+                  {page.imgArr?.map((img, ind) => (
+                    <Image
+                      src={img}
+                      key={ind}
+                      alt={img}
+                      width={480}
+                      height={480}
+                      className="h-[280px] w-auto flex-shrink-0 rounded-md border bg-muted object-contain transition-colors sm:h-[380px]"
+                      priority
+                    />
+                  ))}
+                </div>
+              )}
+              {page.videoArr?.map((video, ind) => (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
+                <video
+                  src={video}
                   key={ind}
-                  alt={img}
-                  width={720}
-                  height={405}
-                  className="my-4 rounded-md border bg-muted transition-colors"
-                  priority
+                  controls
+                  className="my-4 w-full rounded-md border bg-muted transition-colors"
                 />
               ))}
+              {page.documentArr && page.documentArr.length > 0 && (
+                <div className="my-4 flex flex-wrap gap-3">
+                  {page.documentArr.map((doc, ind) => (
+                    <Link
+                      key={ind}
+                      href={doc.href}
+                      target="_blank"
+                      className={cn(buttonVariants({ variant: "outline" }))}
+                    >
+                      <Icons.post className="w-4 h-4 mr-2" />
+                      {doc.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}

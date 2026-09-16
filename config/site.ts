@@ -1,42 +1,56 @@
 export const siteConfig = {
-  name: "Naman Barkiya | Developer Portfolio",
-  authorName: "Naman Barkiya",
-  username: "namanbarkiya",
+  name: "Elissa Issa | Developer & Creative Portfolio",
+  authorName: "Elissa Issa",
+  // TODO: replace with your actual GitHub/handle once you've decided on one.
+  username: "your-username",
+  tagline: "Multimedia and Software Engineer",
   description:
-    "Naman Barkiya's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
-  url: "https://nbarkiya.xyz",
+    "Elissa Issa's portfolio — a fifth-year Computer and Communications Engineering (Multimedia) student proficient in full-stack web development, especially front-end and design.",
+  bio: "Blending between logic and form, each work should be made with intention. Eager to solve problems, most inspired by building creativity",
+  // `percentage` drives the fill on the homepage language progress bars.
+  languages: [
+    { name: "English", level: "C2", percentage: 95 },
+    { name: "French", level: "C2", percentage: 95 },
+    { name: "Arabic", level: "Native", percentage: 100 },
+  ],
+  // TODO: replace with your actual deployed domain.
+  url: "https://example.com",
   links: {
-    twitter: "https://x.com/namanbarkiya",
-    github: "https://github.com/namanbarkiya",
+    // TODO: replace with your real TikTok profile URL.
+    tiktok: "https://tiktok.com/@yourusername",
+    // TODO: add your GitHub profile URL.
+    github: "#",
   },
-  ogImage: "https://nbarkiya.xyz/profile-img.jpg",
-  iconIco:
-    "https://res.cloudinary.com/dbfvcn3f6/image/upload/v1692357384/assets/naman-favicon.ico",
-  logoIcon:
-    "https://res.cloudinary.com/dbfvcn3f6/image/upload/v1692357294/assets/naman-logo.png",
+  // TODO: replace with your own photo/screenshot for social share previews
+  // (the template's own profile-img.jpg was removed — it belonged to the
+  // original author, not you).
+  ogImage: "/next.svg",
+  // TODO: replace with your own favicon.
+  iconIco: "/favicon.ico",
+  // TODO: replace with your own logo.
+  logoIcon: "/logo.png",
   keywords: [
-    "Naman Barkiya",
+    "Elissa Issa",
     "Full Stack Developer",
+    "Creative Developer Portfolio",
+    "Multimedia Engineer",
     "Web Developer Portfolio",
-    "Next.js portfolio template",
-    "React portfolio template",
-    "Developer portfolio template",
-    "Portfolio website template",
+    "UI/UX Designer",
+    "Next.js portfolio",
+    "React portfolio",
+    "Developer portfolio",
+    "Portfolio website",
     "Next.js template",
     "Modern portfolio website",
     "Frontend developer portfolio",
     "Full stack developer portfolio",
-    "Open source portfolio template",
-    "Web developer portfolio template",
-    "Responsive portfolio template",
+    "Web developer portfolio",
+    "Responsive portfolio",
     "React.js portfolio",
     "Tailwind CSS portfolio",
-    "Developer showcase template",
-    "Free portfolio template",
-    "Next.js 13 template",
-    "Shadcn UI template",
-    "Career timeline template",
+    "Developer showcase",
+    "Career timeline",
     "Portfolio with dark mode",
-    "GitHub portfolio template",
+    "GitHub portfolio",
   ],
 };

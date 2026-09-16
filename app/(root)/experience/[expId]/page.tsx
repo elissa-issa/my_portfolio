@@ -12,28 +12,13 @@ import ChipContainer from "@/components/ui/chip-container";
 import { ResponsiveTabs } from "@/components/ui/responsive-tabs";
 import { experiences } from "@/config/experience";
 import { siteConfig } from "@/config/site";
+import { formatDateRange } from "@/lib/utils";
 
 interface ExperienceDetailPageProps {
   params: {
     expId: string;
   };
 }
-
-// Helper function to extract year from date
-const getYearFromDate = (date: Date): string => {
-  return new Date(date).getFullYear().toString();
-};
-
-// Helper function to get duration text
-const getDurationText = (
-  startDate: Date,
-  endDate: Date | "Present"
-): string => {
-  const startYear = getYearFromDate(startDate);
-  const endYear =
-    typeof endDate === "string" ? "Present" : getYearFromDate(endDate);
-  return `${startYear} - ${endYear}`;
-};
 
 export async function generateMetadata({
   params,
@@ -188,7 +173,7 @@ export default function ExperienceDetailPage({
                   </div>
                   <div className="flex justify-center sm:justify-end">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
-                      {getDurationText(
+                      {formatDateRange(
                         experience.startDate,
                         experience.endDate
                       )}

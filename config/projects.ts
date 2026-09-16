@@ -1,8 +1,26 @@
-import { ValidCategory, ValidExpType, ValidSkills } from "./constants";
+import {
+  ValidCategory,
+  ValidExpType,
+  ValidPortfolioCategory,
+  ValidSkills,
+} from "./constants";
+
+interface PagesInfoDocumentInterface {
+  label: string;
+  href: string;
+}
 
 interface PagesInfoInterface {
   title: string;
-  imgArr: string[];
+  imgArr?: string[];
+  // Optional gameplay/demo clips for this page section (e.g. game projects).
+  // Rendered as native <video> players alongside imgArr on the project page.
+  videoArr?: string[];
+  // Optional downloadable/viewable documents (PDFs) for this section —
+  // rendered as clearly labeled buttons, since a PDF can't be embedded as
+  // an image. Use this instead of (or alongside) the top-level websiteLink
+  // when a project has more than one document to surface.
+  documentArr?: PagesInfoDocumentInterface[];
   description?: string;
 }
 
@@ -14,6 +32,10 @@ interface DescriptionDetailsInterface {
 export interface ProjectInterface {
   id: string;
   type: ValidExpType;
+  // Top-level split used by the Projects page tabs: "development" for
+  // web/mobile/game dev (code-based) work, "creative" for 3D, branding,
+  // sound/audiovisual, UI/UX, and video/photo editing (design & multimedia) work.
+  portfolioCategory: ValidPortfolioCategory;
   companyName: string;
   category: ValidCategory[];
   shortDescription: string;
@@ -29,409 +51,561 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
-    id: "built-design",
-    companyName: "Builtdesign",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
+    id: "bitecheck",
+    companyName: "BiteCheck",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Mobile Dev", "Full Stack", "Backend"],
     shortDescription:
-      "Developed and optimized a high-performing website catering to over 4000 users, emphasizing efficiency and maintainability.",
-    websiteLink: "https://builtdesign.in",
+      "Built a Flutter and Node/Express food safety app that scans ingredient labels via OCR and flags allergens against each user's personal dietary profile.",
     techStack: [
-      "Next.js",
-      "React",
+      "Flutter",
+      "Dart",
       "Node.js",
+      "express.js",
       "MongoDB",
-      "GraphQL",
-      "Nest.js",
+      "Mongoose",
+      "JWT",
+      "Tesseract.js",
+    ],
+    startDate: new Date("2026-06-01"),
+    endDate: new Date("2026-06-01"),
+    companyLogoImg: "/projects/bitecheck/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Onboarding & Authentication",
+        description:
+          "Welcome flow and email/password auth screens backed by JWT and bcrypt-hashed credentials.",
+        imgArr: [
+          "/projects/bitecheck/onboarding_1.png",
+          "/projects/bitecheck/onboarding_2.png",
+          "/projects/bitecheck/onboarding_3.png",
+        ],
+      },
+      {
+        title: "Personalized Safety Profile Setup",
+        description:
+          "A 4-step onboarding flow that captures lifestyle preferences (vegan, gluten-free, halal, etc.) and allergies, including a searchable custom-allergy field, to configure the analysis engine per user.",
+        imgArr: [
+          "/projects/bitecheck/personalization_1.png",
+          "/projects/bitecheck/personalization_2.png",
+          "/projects/bitecheck/personalization_3.png",
+          "/projects/bitecheck/personalization_5.png",
+        ],
+      },
+      {
+        title: "OCR Label Scanning & Ingredient Analysis",
+        description:
+          "Camera/upload capture sent to a Tesseract.js OCR endpoint, with extracted ingredients reviewed, saved, and run through a rule-based engine that returns a quality score, risk flags, and per-ingredient warnings.",
+        imgArr: [
+          "/projects/bitecheck/scan_1.png",
+          "/projects/bitecheck/scan_2.png",
+          "/projects/bitecheck/scan_3.png",
+          "/projects/bitecheck/scan_4.png",
+          "/projects/bitecheck/scan_5.png",
+        ],
+      },
+      {
+        title: "Home & Discover",
+        description:
+          "A dashboard of recent scans and personalized recommendations, plus store and product search/discovery with live safety scores for each result.",
+        imgArr: [
+          "/projects/bitecheck/discover_1.png",
+          "/projects/bitecheck/discover_2.png",
+          "/projects/bitecheck/discover_3.png",
+          "/projects/bitecheck/discover_4.png",
+        ],
+      },
+      {
+        title: "Profile & Product Detail",
+        description:
+          "Account and health-profile management alongside a detailed product view showing quality score, matched restrictions, and a personalized safety verdict.",
+        imgArr: [
+          "/projects/bitecheck/profile_1.png",
+          "/projects/bitecheck/profile_2.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "BiteCheck is a food safety app I built to solve a problem a lot of people with allergies and dietary restrictions run into every day: reading a crowded ingredient label and trying to figure out, on the spot, whether a product is actually safe to eat. The app pairs a Flutter mobile front end with a Node.js/Express API and a MongoDB database to turn that guesswork into a clear, personalized verdict.",
+        "At the core of the app is a scan flow: users photograph or upload an ingredient label, the backend runs it through Tesseract.js OCR, and the extracted text is cleaned up into a structured ingredient list the user can review and correct before analysis. From there, a rule-based engine I designed cross-references the ingredients against a library of ingredient rules and each user's selected allergies and lifestyle preferences (vegan, gluten-free, halal, lactose-free, and more), returning a quality score, a safe/caution/unsafe verdict, and explainable, per-ingredient warnings.",
+        "Beyond scanning, BiteCheck lets users save scan history, favorite products, and discover other products and nearby stores, with every result personalized to their own restrictions. I modeled the data in MongoDB with Mongoose across users, products, stores, restrictions, ingredient rules, favorites, and scan history, and secured the API with JWT authentication and bcrypt password hashing. User-submitted products start in a pending state and go through an admin moderation step before appearing in the public catalog, which keeps the crowdsourced data trustworthy as it grows.",
+      ],
+      bullets: [
+        "Built a Flutter mobile app covering onboarding, authentication, scanning, discovery, favorites, history, and profile management.",
+        "Designed REST APIs in Express with JWT authentication, bcrypt password hashing, and role-based admin authorization.",
+        "Integrated Tesseract.js OCR to extract ingredient text directly from photographed or uploaded product labels.",
+        "Built a deterministic, rule-based ingredient-analysis engine with aliases, severity levels, and personalized scoring.",
+        "Modeled MongoDB collections with Mongoose for users, products, stores, restrictions, ingredient rules, favorites, and scan history.",
+        "Added an admin moderation workflow so user-scanned products are reviewed before joining the public catalog.",
+        "Wrote backend unit tests covering the ingredient-analysis and warning-deduplication logic.",
+      ],
+    },
+  },
+  {
+    id: "smart-inventory",
+    companyName: "Smart Inventory",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Full Stack", "Web Dev", "AI/ML"],
+    shortDescription:
+      "A full-stack plant inventory app that classifies plant photos with a fine-tuned PyTorch model and predicts prices with a scikit-learn pipeline, built with React, FastAPI, and MongoDB/GridFS.",
+    techStack: [
+      "React",
       "Typescript",
+      "Vite",
+      "React Router",
+      "Material UI",
+      "FastAPI",
+      "Python",
+      "MongoDB",
+      "GridFS",
+      "PyTorch",
+      "scikit-learn",
     ],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign/logo.png",
+    startDate: new Date("2025-12-01"),
+    endDate: new Date("2025-12-01"),
+    companyLogoImg: "/projects/smart-inventory/analyzer_1.png",
     pagesInfoArr: [
       {
-        title: "Landing Page",
+        title: "Dashboard",
         description:
-          "Modern and responsive landing page showcasing company services and portfolio",
+          "A landing dashboard summarizing total inventory as a donut chart broken down by plant category, alongside quick access to the plant identifier.",
         imgArr: [
-          "/projects/builtdesign/landing_1.webp",
-          "/projects/builtdesign/landing_3.webp",
-          "/projects/builtdesign/landing_5.webp",
-          "/projects/builtdesign/landing_6.webp",
-          "/projects/builtdesign/landing_2.webp",
-          "/projects/builtdesign/landing_4.webp",
+          "/projects/smart-inventory/dashboard_1.png",
         ],
       },
       {
-        title: "Custom PDF Reader and optimizer",
+        title: "Inventory Management",
         description:
-          "Specialized PDF viewer with optimization features for improved performance and user experience",
-        imgArr: ["/projects/builtdesign/pdf_opt.webp"],
-      },
-      {
-        title: "Clients Dashboard",
-        description:
-          "Comprehensive client portal with project tracking, document management, and communication tools",
+          "A product table grouped by category with inline quantity and price editing, predicted-vs-modified price columns, and contextual fields like month and occasion carried over from each product's analysis.",
         imgArr: [
-          "/projects/builtdesign/cli_dashboard_1.webp",
-          "/projects/builtdesign/cli_dashboard_2.webp",
-          "/projects/builtdesign/cli_dashboard_3.webp",
+          "/projects/smart-inventory/inventory_3.png",
         ],
       },
       {
-        title: "Admin Dashboard",
+        title: "Plant Analyzer & AI Classification",
         description:
-          "Powerful administrative interface for managing users, projects, and system settings",
-        imgArr: ["/projects/builtdesign/logo.png"],
+          "Upload or capture a plant photo to run it through a fine-tuned EfficientNet-B0 classifier and a scikit-learn price model, review the predicted species, confidence score, and price, get flagged on matching products already in stock, and handle unrecognized images gracefully.",
+        imgArr: [
+          "/projects/smart-inventory/analyzer_1.png",
+          "/projects/smart-inventory/analyzer_2.png",
+        ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "During my time at Builtdesign, I had the opportunity to work on a dynamic and user-focused project that involved designing and optimizing a website catering to a user base of over 4000 individuals. My role as a full-stack web developer was to ensure a seamless experience for users by creating an efficient and maintainable platform.",
-        "I collaborated closely with the product team to integrate cutting-edge features, employing technologies like Next.js and React with TypeScript for captivating front-end experiences. Additionally, I contributed significantly to the backend by utilizing Node.js, MongoDB, and GraphQL to design robust APIs and ensure smooth system functionality.",
-        "This experience allowed me to enhance my skills in various areas of web development and deliver a high-quality product. I gained proficiency in front-end technologies such as Material UI and Tailwind CSS, as well as backend technologies including Nest.js and MySQL. The project's success in catering to a large user base and providing an intuitive user interface has further motivated me to pursue excellence in web development.",
+        "Smart Inventory is a full-stack plant inventory system I built to explore combining a real CRUD application with computer vision and machine learning, using a React/TypeScript frontend and a FastAPI/MongoDB backend. It's aimed at a nursery- or plant-shop-style workflow, where someone needs to add stock quickly, keep visual records of products, and get a fair price estimate without looking everything up by hand.",
+        "The centerpiece is the plant analyzer: a user photographs or uploads a plant image, and the backend runs it through a fine-tuned EfficientNet-B0 model (PyTorch/Torchvision) to classify the species and map it to a product category. That result, along with contextual inputs like size, season, and occasion, is fed into a scikit-learn pipeline (one-hot encoding plus a RandomForestRegressor) that predicts a price. Both models were trained separately in notebooks and loaded directly into the API for local inference, so the whole classify-and-price flow runs without any external AI service calls.",
+        "On the product side, inventory data lives in MongoDB, while uploaded plant images are stored and streamed through GridFS rather than the filesystem. The backend follows a controller/service/repository structure with Pydantic-validated DTOs, and the API also handles duplicate detection, flagging when a newly analyzed plant matches a product that's already in stock so the user can update quantity instead of creating a duplicate entry. The React dashboard ties it together with a category breakdown chart, an editable inventory table, and the analyzer flow itself.",
       ],
       bullets: [
-        "Developed and optimized a high-performing website catering to over 4000 users.",
-        "Collaborated closely with the product team to implement cutting-edge features.",
-        "Created an intuitive admin dashboard to efficiently manage and announce contest winners.",
-        "Leveraged Next.js, React with TypeScript for captivating front-end experiences.",
-        "Utilized Node.js, MongoDB, and GraphQL to design and manage databases.",
+        "Built a React, TypeScript, and MUI frontend with a dashboard, editable inventory table, and plant analyzer flow.",
+        "Built FastAPI REST endpoints for product listing, creation, updates, deletion, duplicate detection, and image streaming.",
+        "Integrated a fine-tuned EfficientNet-B0 PyTorch model for plant image classification.",
+        "Integrated a scikit-learn RandomForest pipeline for context-aware price prediction.",
+        "Modeled inventory data in MongoDB and stored/streamed product images through GridFS.",
+        "Structured the backend with a controller/service/repository pattern and Pydantic DTO validation.",
+        "Implemented duplicate-product detection so re-scanned plants update existing stock instead of creating new entries.",
       ],
     },
   },
   {
-    id: "the-super-quotes",
-    companyName: "The Super Quotes",
-    type: "Professional",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Elevated The Super Quotes app with JavaScript, React Native, APIs, Redux magic, and Google Play Store debut.",
-    websiteLink:
-      "https://play.google.com/store/apps/details?id=com.thesuperlife",
-    techStack: ["React Native", "Node.js", "MongoDB", "Javascript"],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/superquotes/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Quotes View Page",
-        description:
-          "Elegantly designed quotes display with customizable themes and sharing options",
-        imgArr: ["/projects/superquotes/app_2.webp"],
-      },
-      {
-        title: "Quotes Download Component",
-        description:
-          "Feature allowing users to download quotes as beautiful images for social media sharing",
-        imgArr: [
-          "/projects/superquotes/app_4.webp",
-          "/projects/superquotes/app_7.webp",
-        ],
-      },
-      {
-        title: "Account Management",
-        description:
-          "User profile management with favorites, history, and personalization settings",
-        imgArr: ["/projects/superquotes/app_6.webp"],
-      },
-      {
-        title: "Interest Selection and Update Page",
-        description:
-          "Interactive interface for users to select and update their quote preferences and interests",
-        imgArr: [
-          "/projects/superquotes/app_1.webp",
-          "/projects/superquotes/app_3.webp",
-        ],
-      },
-      {
-        title: "Responsiveness",
-        description:
-          "Adaptive design ensuring optimal user experience across various device sizes and orientations",
-        imgArr: ["/projects/superquotes/app_5.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        `Venturing into the world of creativity at The Super Quotes was an exhilarating journey. As a passionate developer, I led the charge in crafting a compelling application from inception to completion, using the dynamic duo of JavaScript and React Native.`,
-        `The heart of my achievement lay in the seamless integration of APIs, threading a tapestry of data flow that propelled the application's functionality to new heights.`,
-        `With the wizardry of Redux, I choreographed a symphony of state management and performance optimization, orchestrating a ballet of responsiveness that wowed users with every interaction.`,
-        `A crescendo awaited as I unveiled the culmination of my work on the grand stage of the Google Play Store. The app's debut marked an epoch, opening doors to an expansive audience eager to embrace the charm of The Super Quotes.`,
-      ],
-      bullets: [
-        "Led the end-to-end development of a captivating application using JavaScript and React Native.",
-        "Championed the integration of APIs, harmonizing data flow and enhancing application functionality.",
-        "Conducted Redux magic to ensure state management and optimize performance, delivering a mesmerizing user experience.",
-        "Premiered the application on the Google Play Store, capturing hearts and expanding its user base.",
-      ],
-    },
-  },
-  {
-    id: "apex-shopping",
-    companyName: "Apex Shopping App",
+    id: "castle-escape",
+    companyName: "Castle Escape",
     type: "Personal",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
+    portfolioCategory: "development",
+    category: ["Game Dev"],
     shortDescription:
-      "Developed a feature-rich mobile shopping application with admin panel, user authentication, and seamless product management using React Native and Firebase.",
-    githubLink: "https://github.com/namanbarkiya/apex-shopping-app",
-    techStack: ["React Native", "Javascript", "Redux", "Node.js", "express.js"],
-    startDate: new Date("2021-07-14"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/apex/logo.png",
+      "A four-level 3D escape/adventure game built in Unity and C#, where players find a hidden key, solve a potion-brewing puzzle, survive waves of enemies, and fight a guard to escape the castle.",
+    techStack: ["Unity", "C#"],
+    startDate: new Date("2026-07-01"),
+    endDate: new Date("2026-07-01"),
+    companyLogoImg: "/projects/castle-escape/logo.png",
     pagesInfoArr: [
       {
-        title: "Splash Screen",
-        description: "Custom animated splash screen with app branding",
-        imgArr: ["/projects/apex/app_7.webp"],
-      },
-      {
-        title: "Login/Signup Authentication",
-        description: "Secure user authentication system with Firebase",
-        imgArr: ["/projects/apex/app_1.webp"],
-      },
-      {
-        title: "All Products Explore Screen",
-        description: "Interactive product browsing with categories and filters",
-        imgArr: ["/projects/apex/app_3.webp"],
-      },
-      {
-        title: "Admin Panel",
+        title: "Main Menu",
         description:
-          "Comprehensive admin dashboard for product and order management",
-        imgArr: ["/projects/apex/app_4.webp", "/projects/apex/app_6.webp"],
+          "A level-select menu that loads any of the four levels directly or quits the game, built with Unity UI over a hand-painted title screen.",
+        imgArr: ["/projects/castle-escape/menu.png"],
       },
       {
-        title: "Sidenav Navigation",
-        description: "Intuitive side navigation for easy app navigation",
-        imgArr: ["/projects/apex/app_5.webp"],
-      },
-      {
-        title: "Firebase Database",
+        title: "Level 1 — The Locked Room",
         description:
-          "Real-time database structure for efficient data management",
-        imgArr: ["/projects/apex/db.webp"],
+          "The player wakes up trapped in a room, searches for a randomly spawned key, and picks the lock on the door to move on — driven by a KeySpawner, KeyPickup, and a singleton Level1WinManager handling UI, effects, and the scene transition.",
+        imgArr: ["/projects/castle-escape/level1.png"],
+      },
+      {
+        title: "Level 2 & 3 — Potion Puzzle & Combat",
+        description:
+          "Level 2 has the player collect ingredients and brew a potion in the correct order against hints and limited trials; Level 3 then throws Rock, Bottle, and Magic Orb projectiles at waves of bats, slimes, and ghosts, each with their own weaknesses, while a heart-based health system tracks survival.",
+        imgArr: ["/projects/castle-escape/level2.png"],
+      },
+      {
+        title: "Level 4 — Final Guard Fight",
+        description:
+          "A one-on-one fight against the castle guard with step movement, punches, ducking, and a counter window against the guard's combo attacks and stamina-driven behavior, ending in a win/lose panel with retry and menu options.",
+        imgArr: ["/projects/castle-escape/level4.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "The Apex Shopping App represents a comprehensive mobile e-commerce solution that I developed from the ground up using React Native and Firebase. This project showcases my ability to create a full-featured shopping application with both user and admin functionalities.",
-        "The application features a robust authentication system, allowing users to securely sign up and log in. The product exploration interface is designed with user experience in mind, incorporating smooth navigation and intuitive filtering options.",
-        "One of the key highlights is the admin panel, which provides complete control over product management, order processing, and inventory tracking. The integration with Firebase ensures real-time data synchronization and reliable data persistence.",
-        "The app's architecture emphasizes scalability and performance, utilizing Redux for state management and following best practices for mobile app development. The UI/UX design focuses on providing a seamless shopping experience across different device sizes.",
+        "Castle Escape is a 3D Unity game I built in C# as a level-based escape/adventure game: a peasant girl wakes up trapped in a castle and has to make it out through four sequential rooms, each built around a different mechanic. It's structured as a straightforward main-menu-to-level flow, but every level required its own systems: a key hunt, an inventory-and-recipe puzzle, a wave-based combat encounter, and a final one-on-one boss fight.",
+        "Level 1 is a search-and-unlock room built around a KeySpawner and KeyPickup, reported to a singleton Level1WinManager that handles the win UI, particle effects, and the scene transition to Level 2. Level 2 turns into an inventory puzzle: the player collects ingredients scattered around the room and feeds them into a PotionPotManager that validates the brew order against a recipe, tracks hearts/trials, and surfaces hints when the player gets stuck. Level 3 shifts into combat — the player picks a weapon (Rock, Bottle, or Magic Orb), throws projectiles at bats, slimes, and ghosts spawned by a Level3EnemySpawner with an increasing spawn rate, and each enemy type has its own weaknesses and stun behavior against the different weapons.",
+        "The final level is a scripted one-on-one guard fight: Level4GuardController runs a coroutine-based attack loop that alternates punches and combo attacks, opens a short counter window, and slows down as the guard's stamina depletes, while Level4PlayerController handles step movement, punching, ducking, and hit reactions. Across all four levels I leaned on Unity's Animator for character and combat animation, Rigidbody and trigger colliders for movement and pickups, UGUI/TextMesh Pro for menus and HUD, and AudioSource/ParticleSystem for feedback on key moments like collection, wins, and losses, and shipped it as a Windows standalone build.",
       ],
       bullets: [
-        "Implemented secure user authentication and authorization using Firebase",
-        "Designed and developed an intuitive product browsing and shopping cart system",
-        "Created a comprehensive admin panel for product and order management",
-        "Integrated real-time data synchronization using Firebase Database",
-        "Implemented state management using Redux for optimal performance",
-        "Designed responsive UI components following mobile-first principles",
-        "Incorporated smooth animations and transitions for enhanced user experience",
+        "Built a four-level Unity game with a main menu, level-select flow, and per-level intro panels.",
+        "Implemented a key-hunt puzzle with randomized spawn points and a singleton win-state manager.",
+        "Built an ingredient-collection and potion-brewing puzzle with recipe validation, hints, and limited trials.",
+        "Designed a projectile combat system with three weapon types, enemy weaknesses, stun states, and a scaling enemy spawner.",
+        "Scripted a final boss fight with coroutine-driven attack patterns, a counter-window mechanic, and stamina-based pacing.",
+        "Integrated Unity's Animator, Rigidbody physics, UGUI/TextMesh Pro, AudioSource, and ParticleSystem across all four levels.",
+        "Shipped a Windows standalone build of the finished game.",
       ],
     },
   },
   {
-    id: "builtdesign-blogs",
-    companyName: "Builtdesign Blogs",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
+    id: "eventful",
+    companyName: "Eventful",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Full Stack", "Web Dev", "AI/ML"],
     shortDescription:
-      "Crafted Builtdesign's vibrant Blogs Website using Netlify CMS and React for engaging content experiences.",
-    websiteLink: "https://blog.builtdesign.in",
-    techStack: ["Next.js", "React", "Node.js", "MongoDB", "Typescript"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign-blogs/logo.png",
+      "A full-stack event-planning marketplace for browsing venues, menus, decorations, and entertainment, saving collections, checking out orders, and generating catalog-grounded AI event plans with Google Gemini.",
+    techStack: [
+      "React",
+      "Vite",
+      "React Router",
+      "Material UI",
+      "express.js",
+      "MongoDB",
+      "Mongoose",
+      "Google Gemini",
+    ],
+    startDate: new Date("2026-08-01"),
+    endDate: new Date("2026-08-01"),
+    // TODO: no screenshots were provided yet — replace with a real cover
+    // image once you have one (see the note in pagesInfoArr below).
+    companyLogoImg: "/logo.png",
     pagesInfoArr: [
       {
-        title: "Blog Landing Page",
+        title: "Screenshots & Demo — Coming Soon",
         description:
-          "Modern and responsive landing page showcasing featured articles",
-        imgArr: ["/projects/builtdesign-blogs/blog_2.webp"],
+          "No screenshots were provided for this project yet, so this section uses a placeholder image — swap it for real screenshots of the marketplace, cart/checkout, and AI planner whenever you have them. Two local screen recordings exist (~130MB and ~92MB) but were intentionally left out of the repo: a single file that large exceeds GitHub's 100MB push limit. Host them externally (YouTube, Drive, etc.) and this project can link out to them, or compress them and add as videoArr like Castle Escape.",
+        imgArr: ["/logo.png"],
       },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Eventful is a full-stack event-planning marketplace where users can browse and book real event services — venues, catering menus, decorations, entertainment, and prebuilt bundles — then save favorites, build collections or fully customized plans, check delivery locations, check out orders, and leave reviews. I built the frontend as a React and Vite single-page app with Material UI and React Router, and the backend as an Express REST API on MongoDB via Mongoose, with custom Bearer-token authentication (HMAC-signed tokens, PBKDF2 password hashing) instead of pulling in a full auth framework.",
+        "The part I'm most proud of is the premium AI planner. Rather than letting an LLM freely invent event suggestions, the backend loads the real venues, menus, decorations, entertainment, and bundles currently in MongoDB, sends that catalog together with the user's prompt to Google Gemini (gemini-2.5-flash), and requires a structured JSON response. Every recommended item is then validated against the actual service catalog before it's returned, so the plan the user sees is grounded in bookable services rather than hallucinated ones — and premium-gated on both the frontend and backend.",
+        "Beyond the AI feature, the backend handles a fair amount of real marketplace logic: checkout with quantity and payment-method validation, promotion/price calculation, venue and entertainment availability checks against existing orders to prevent double-booking, and review eligibility tied to whether a user actually has a paid/delivered order for that service. Carts, collections, and customized plans store service IDs alongside lightweight snapshots so saved items stay meaningful even if the underlying catalog changes.",
+      ],
+      bullets: [
+        "Built a React/Vite SPA with protected routes, a reusable service catalog UI, search, favorites, collections, cart, checkout, and profile flows.",
+        "Designed an Express REST API with controllers, middleware, and centralized error handling over Mongoose models.",
+        "Modeled a full marketplace schema in MongoDB: users, services, bundles, carts, collections, customized plans, orders, reviews, and saved locations.",
+        "Implemented custom Bearer-token authentication with PBKDF2 password hashing and per-user resource ownership checks.",
+        "Integrated Google Gemini for a premium AI event planner, grounding every recommendation in real catalog services and validating the model's output before returning it.",
+        "Added checkout logic with availability conflict detection, order creation, and review eligibility tied to completed orders.",
+      ],
+    },
+  },
+  {
+    id: "3d-diner",
+    companyName: "Retro Diner — 3D Interior",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["3D Modeling"],
+    shortDescription:
+      "A stylized 1950s-style diner interior — red vinyl booths, a curved counter, and pendant lighting, modeled and furnished from an empty shell.",
+    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
+    // so I can tag it correctly here and in the skills list.
+    techStack: [],
+    startDate: new Date("2026-01-01"),
+    endDate: new Date("2026-01-01"),
+    companyLogoImg: "/projects/3d-diner/logo.png",
+    pagesInfoArr: [
       {
-        title: "Blog Listing",
+        title: "Interior Renders",
         description:
-          "Organized display of all blog posts with search and filtering",
-        imgArr: ["/projects/builtdesign-blogs/blog_3.webp"],
-      },
-      {
-        title: "Category Navigation",
-        description: "Intuitive category-based navigation system",
-        imgArr: ["/projects/builtdesign-blogs/blog_1.webp"],
-      },
-      {
-        title: "Article View",
-        description:
-          "Clean and readable article layout with rich media support",
+          "A stylized 1950s-style diner interior: red vinyl booths, round bistro tables, a curved counter with bar stools and stocked glassware, and pendant lighting throughout.",
         imgArr: [
-          "/projects/builtdesign-blogs/blog_4.webp",
-          "/projects/builtdesign-blogs/blog_5.webp",
+          "/projects/3d-diner/render_1.jpg",
+          "/projects/3d-diner/render_2.jpg",
+          "/projects/3d-diner/render_3.jpg",
+          "/projects/3d-diner/render_4.jpg",
         ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "As part of the Builtdesign platform, I developed a sophisticated blog website that serves as a content hub for the company's thought leadership and industry insights. The project leveraged Next.js and React to create a fast, SEO-friendly platform.",
-        "The blog platform features a modern, responsive design that prioritizes readability and user engagement. I implemented a robust content management system using Netlify CMS, enabling the content team to easily publish and manage blog posts.",
-        "The architecture includes server-side rendering for optimal performance and SEO, while MongoDB provides flexible content storage. TypeScript ensures code reliability and maintainability throughout the application.",
-        "Key features include category-based navigation, search functionality, and a rich text editor for content creation. The platform supports various content types including images, code snippets, and embedded media.",
+        "A 3D interior modeling piece imagining a retro diner: red booth seating, round tables and chairs, a curved service counter stocked with glassware and condiments, and pendant lamps hung over each booth. The brief was to design a cohesive, inviting food-service space from empty shell to fully furnished room.",
       ],
       bullets: [
-        "Developed a modern blog platform using Next.js and React with TypeScript",
-        "Implemented Netlify CMS for efficient content management",
-        "Created a responsive design that prioritizes readability and user engagement",
-        "Built server-side rendering for optimal performance and SEO",
-        "Integrated MongoDB for flexible content storage and management",
-        "Developed category-based navigation and search functionality",
-        "Implemented rich text editing capabilities for content creation",
+        "Modeled and arranged a full diner interior: booths, tables, chairs, counter, and lighting.",
+        "Composed multiple camera angles to showcase the space from overview and detail perspectives.",
       ],
     },
   },
   {
-    id: "portfolio-card",
-    companyName: "Portfolio Card",
+    id: "3d-house-lounge",
+    companyName: "Home Bar & Lounge — 3D Interior",
     type: "Personal",
-    category: ["Web Dev", "Frontend", "3D Modeling"],
+    portfolioCategory: "creative",
+    category: ["3D Modeling"],
     shortDescription:
-      "Forged an immersive 3D Portfolio Card utilizing the prowess of Three.js and Blender, where art and technology converge in an interactive masterpiece.",
-    websiteLink: "https://card.namanbarkiya.xyz/",
-    githubLink: "https://github.com/namanbarkiya/3d-portfolio-card",
-    techStack: ["React", "Javascript", "HTML 5", "CSS 3"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/card/logo.png",
+      "A home bar and lounge concept — a curved bar counter beneath a spiral staircase, a bedroom nook, and standalone furniture/prop studies.",
+    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
+    // so I can tag it correctly here and in the skills list.
+    techStack: [],
+    startDate: new Date("2026-02-01"),
+    endDate: new Date("2026-02-01"),
+    companyLogoImg: "/projects/3d-house-lounge/logo.png",
     pagesInfoArr: [
       {
-        title: "Card Views",
-        description: "Front and back views of the interactive 3D card",
-        imgArr: ["/projects/card/card_2.webp", "/projects/card/card_3.webp"],
-      },
-      {
-        title: "Interactive Elements",
+        title: "Home Bar",
         description:
-          "Custom links embedded in the 3D model with interactive animations",
-        imgArr: ["/projects/card/card_1.webp"],
-      },
-      {
-        title: "3D Model Development",
-        description: "Blender project showcasing the model creation process",
-        imgArr: ["/projects/card/card_4.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "In my personal, I've ventured into the world of creativity, fashioning a distinctive portfolio card through the utilization of Three.js.",
-        "This portfolio card transcends convention; it emerges as a captivating 3D model, adorned with meticulous lighting arrangements that conjure a spellbinding visual journey.",
-        "To materialize this concept, I've harnessed the combined potential of Three.js and Blender, orchestrating a meticulous crafting of the central 3D model that serves as the cornerstone of the card's allure.",
-        "Yet, the allure extends beyond aesthetics. I've ingeniously interwoven custom links directly into the fabric of Three.js components. Through the creation and seamless integration of novel components, these additions elegantly rest upon the card's surface, mirroring its rotations and delivering an interactive dimension to my portfolio.",
-        "The portfolio card itself is an opus of motion, perpetually swaying in an auto-rotational dance that unfurls its multifaceted essence. As an enhancement, I've introduced an instinctive user interaction element. A simple, intuitive drag of the card in specific directions grants viewers a comprehensive vantage, enabling exploration from every conceivable angle.",
-        "At its core, my personal epitomizes technical finesse, artistic expression, and interactive design. The amalgamation of Three.js, Blender's prowess, and the innovation of component integration has birthed not only a portfolio card, but a dynamic encounter leaving an indelible imprint on all who partake.",
-      ],
-      bullets: [
-        "Conceptualized and realized a distinct portfolio card using Three.js, highlighting creative exploration.",
-        "Crafted a mesmerizing 3D model enhanced by thoughtful lighting arrangements, resulting in a captivating visual voyage.",
-        "Leveraged the synergy of Three.js and Blender to meticulously sculpt and refine the central 3D model, embodying meticulous attention to detail.",
-        "Innovatively integrated custom links within Three.js components, introducing an interactive layer via seamlessly incorporated new elements.",
-        "Enabled an auto-rotating feature for the portfolio card, perpetually showcasing its various facets to observers.",
-        "Introduced an instinctual user interaction mechanism, allowing viewers to comprehensively explore the card's dimensions through simple, intuitive dragging motions.",
-        "Represented a fusion of technical prowess, artistic ingenuity, and interactive design in a project that reshapes the boundaries of conventional portfolio representation.",
-      ],
-    },
-  },
-  {
-    id: "cirql-dashboard",
-    companyName: "Cirql Dashboard",
-    type: "Personal",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "Created a dashboard project using React and Tailwind CSS, focusing on UI design and routing implementation.",
-    websiteLink: "https://cirql-ui.namanbarkiya.xyz/",
-    techStack: ["React", "Tailwind CSS", "Google Auth"],
-    startDate: new Date("2023-01-01"),
-    endDate: new Date("2023-02-15"),
-    companyLogoImg: "/projects/cirql/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Dashboard Home",
-        description:
-          "Main dashboard view with analytics widgets and data visualization",
-        imgArr: ["/projects/cirql/web_1.png", "/projects/cirql/web_2.png"],
-      },
-      {
-        title: "Profile Page",
-        description:
-          "User profile management interface with customization options",
-        imgArr: ["/projects/cirql/web_3.png", "/projects/cirql/web_4.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "For the 'Cirql Dashboard' personal, I aimed to enhance my UI design skills and deepen my understanding of routing within a React application.",
-        "I utilized React and Tailwind CSS to craft an intuitive dashboard interface that provides users with an organized overview of data and functionalities. The UI components were thoughtfully designed to ensure a seamless user experience.",
-        "Incorporating Google Sign-In Authentication further fortified the project by adding a layer of security and convenience. Users are required to authenticate before accessing certain routes, ensuring the safety of sensitive information.",
-        "The routing system was meticulously implemented to enable smooth navigation between different sections of the dashboard, simulating real-world use cases.",
-        "Through this project, I've gained valuable insights into UI/UX design principles and the implementation of secure and efficient routing in React applications.",
-      ],
-      bullets: [
-        "Created a user-friendly dashboard project using React and Tailwind CSS.",
-        "Implemented Google Sign-In Authentication to ensure secure access to sensitive routes.",
-        "Designed UI components to provide an intuitive and visually pleasing experience.",
-        "Focused on implementing a smooth routing system to simulate real-world use cases.",
-        "Enhanced my skills in UI design, routing, and component architecture.",
-      ],
-    },
-  },
-  {
-    id: "inscript-hindi-typing",
-    companyName: "Inscript Hindi Typing",
-    type: "Personal",
-    category: ["Web Dev", "UI/UX"],
-    shortDescription:
-      "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
-    websiteLink: "https://hindityping.namanbarkiya.xyz",
-    githubLink: "https://github.com/namanbarkiya/inscript-hindi-keyboard",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
-    startDate: new Date("2022-05-01"),
-    endDate: new Date("2022-06-15"),
-    companyLogoImg: "/projects/hindi-keyboard/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Typing Interface",
-        description: "Minimal and user-friendly Inscript Hindi typing area",
-        imgArr: ["/projects/hindi-keyboard/web_1.png"],
-      },
-      {
-        title: "Copy and Download the file",
-        description:
-          "Export functionality allowing users to copy text or download as a document file",
+          "A curved home bar counter with a spiral staircase behind it, stocked with bottles, glassware, and a fruit bowl.",
         imgArr: [
-          "/projects/hindi-keyboard/web_2.png",
-          "/projects/hindi-keyboard/web_3.png",
+          "/projects/3d-house-lounge/render_1.jpg",
+          "/projects/3d-house-lounge/render_2.jpg",
+          "/projects/3d-house-lounge/render_3.jpg",
+        ],
+      },
+      {
+        title: "Bedroom & Living Details",
+        description:
+          "A bedroom desk and seating nook, plus close-up prop studies — a low-poly armchair, a ceramic vase, and a modeled smoking pipe.",
+        imgArr: [
+          "/projects/3d-house-lounge/render_4.jpg",
+          "/projects/3d-house-lounge/render_5.jpg",
+          "/projects/3d-house-lounge/render_6.jpg",
+          "/projects/3d-house-lounge/render_7.jpg",
         ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "The 'Inscript Hindi Typing Website' project emerged from the need to provide a simple and accessible tool for Hindi writers, especially those in digital news and media, who wished to convey data in Hindi.",
-        "Recognizing the challenges posed by complex software in the market, I set out to create a minimalistic typing area that catered to the needs of a vast community of Hindi typists in India.",
-        "The project was designed to address the specific requirements of users familiar with the Inscript keyboard layout, mapping English and Hindi alphabets for seamless typing. The intuitive interface allowed users to effortlessly switch between languages, streamlining the process of content creation.",
-        "Leveraging HTML and CSS, I crafted the website's UI to ensure a user-friendly experience. Additionally, Local Storage was utilized to enable users to save and retrieve their work, enhancing convenience and productivity.",
-        "The website's focus on user experience and simplicity proved to be a key factor in its popularity among Hindi writers. By offering a tool that reduced the barriers to entry, I contributed to the digital empowerment of Hindi typists who previously faced challenges in conveying their message effectively.",
-        "This project marked one of my initial forays into web development and highlighted the transformative potential of technology in addressing real-world challenges.",
+        "A set of interior scenes and prop studies built around a home bar and lounge concept: a curved bar counter beneath a spiral staircase, a bedroom desk nook, a low-poly armchair, and individual object studies like a ceramic vase and a smoking pipe. The project mixes full-room composition with focused single-object modeling.",
       ],
       bullets: [
-        "Developed a user-friendly website for Inscript Hindi typing.",
-        "Catered to the needs of Hindi writers in digital news and media.",
-        "Created a minimalistic and intuitive typing interface for the Inscript keyboard layout.",
-        "Mapped English and Hindi alphabets to provide a seamless typing experience.",
-        "Utilized HTML and CSS to design a user-friendly UI.",
-        "Implemented Local Storage to enable users to save and retrieve their work.",
-        "Contributed to the digital empowerment of Hindi typists by offering a simple tool.",
-        "Marked one of my first web development projects, showcasing technology's potential for addressing real-world needs.",
+        "Modeled a curved home bar counter, spiral staircase, and stocked bar props (bottles, glassware, fruit bowl).",
+        "Composed a bedroom desk and seating nook with furniture and decor.",
+        "Modeled standalone props — an armchair and a smoking pipe — as individual studies.",
+      ],
+    },
+  },
+  {
+    id: "3d-modern-villa",
+    companyName: "Modern Pool Villa — 3D Exterior",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["3D Modeling"],
+    shortDescription:
+      "A modern villa exterior and rooftop concept — a pool wrapping a glass-walled pavilion, timber screening, and an open-plan interior living space.",
+    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
+    // so I can tag it correctly here and in the skills list.
+    techStack: [],
+    startDate: new Date("2026-03-01"),
+    endDate: new Date("2026-03-01"),
+    companyLogoImg: "/projects/3d-modern-villa/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Exterior & Rooftop",
+        description:
+          "A modern two-story villa with a rooftop terrace surrounded by an infinity-style pool, slatted timber screens, dining and lounge seating under umbrellas, and floor-to-ceiling glass.",
+        imgArr: [
+          "/projects/3d-modern-villa/render_1.jpg",
+          "/projects/3d-modern-villa/render_3.jpg",
+          "/projects/3d-modern-villa/render_5.jpg",
+          "/projects/3d-modern-villa/render_6.jpg",
+        ],
+      },
+      {
+        title: "Interior Living Space",
+        description:
+          "The open-plan living area under the villa's pitched glass roof, with modular sofas, a pendant light, and side tables.",
+        imgArr: [
+          "/projects/3d-modern-villa/render_2.jpg",
+          "/projects/3d-modern-villa/render_4.jpg",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "A modern villa exterior and rooftop concept: a pool wrapping around a glass-walled living pavilion, slatted timber privacy screens, a shaded outdoor dining set, and lounge seating under umbrellas. Paired with an interior pass at the open-plan living space beneath the pitched glass roof.",
+      ],
+      bullets: [
+        "Modeled a two-story villa exterior with a wraparound infinity-style pool and timber screening.",
+        "Furnished rooftop dining and lounge areas with tables, chairs, sun loungers, and umbrellas.",
+        "Modeled the open-plan interior living space with modular sofas and lighting under the glass roof.",
+      ],
+    },
+  },
+  {
+    id: "sundae-in-beirut",
+    companyName: "Sundae in Beirut — Brand Identity",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["Branding"],
+    shortDescription:
+      "A full brand identity for Sundae in Beirut, a fictional sweets shop — logo suite, color and typography system, business stationery, and product mockups.",
+    techStack: ["Adobe Illustrator", "InDesign", "Photoshop"],
+    startDate: new Date("2025-11-01"),
+    endDate: new Date("2025-11-01"),
+    // TODO: no raster preview image exists for this PDF-based project yet —
+    // export a PNG/JPG of a key page (e.g. the logo or color palette) and
+    // swap it in here and in pagesInfoArr below.
+    companyLogoImg: "/projects/sundaeinbeirut/logo.png",
+    websiteLink: "/projects/sundae-in-beirut/brand-guidelines.pdf",
+    pagesInfoArr: [
+      {
+        title: "Logo & Stationery - Brand Guidelines - Product Mockups",
+        description:
+          "A full brand guideline document for 'Sundae in Beirut': classic and text-based logo lockups with minimum sizes and clear-space rules, a primary/secondary/neutral color palette (RGB, HEX, and CMYK breakdowns), and a three-font typography system (Domine, Cambria, and a custom display face) with usage rules for each. No image export exists yet — the documents below are the real deliverables.",
+        // imgArr: ["/projects/sundaeinbeirut/logo.png"],
+        documentArr: [
+          {
+            label: "Brand Guidelines (PDF)",
+            href: "/projects/sundae-in-beirut/brand-guidelines.pdf",
+          },
+          {
+            label: "Logo & Stationery (PDF)",
+            href: "/projects/sundae-in-beirut/logo-and-stationery.pdf",
+          },
+          {
+            label: "Product Mockups (PDF)",
+            href: "/projects/sundae-in-beirut/mockups.pdf",
+          },
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Sundae in Beirut is a full brand identity project for a fictional Beirut sweets shop, built around a warm, playful palette of blush pink, deep magenta, and royal blue. The deliverable is a complete guideline document defining the logo system, color usage, and typography rules needed to keep the brand consistent across print, digital, and social.",
+        "The logo system includes a classic full mark for most printed and digital use, and a simplified text-based variant for situations where the full logo doesn't fit, each with defined minimum sizes and clear-space rules. The color system separates primary brand colors (blush pink, deep magenta, royal blue, cherry red, warm brown) from secondary and neutral colors, each documented in RGB, HEX, and CMYK. Typography pairs a display headline font with a body serif and a decorative logo-only face, with explicit rules for casing, weight, and which colors each font is allowed to appear in.",
+        "Beyond the guidelines themselves, the project extends the identity into real business collateral — a letterhead, envelope, and business card design featuring a sample partnership letter — and a set of product mockups applying the branding to real-world items.",
+      ],
+      bullets: [
+        "Designed a two-variant logo system (classic and text-based) with documented minimum sizes and clear-space rules.",
+        "Built a primary/secondary/neutral color system with RGB, HEX, and CMYK values for every color.",
+        "Defined a three-font typography system with per-font usage, casing, weight, and color rules.",
+        "Extended the identity into business stationery: letterhead, envelope, and business card layouts.",
+        "Produced product mockups applying the brand to real-world packaging and collateral.",
+      ],
+    },
+  },
+  {
+    id: "national-magazine-spread",
+    companyName: "National Magazine — Editorial Spread",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["Print Design"],
+    shortDescription:
+      "A multi-page editorial magazine spread design for a travel feature on Cape Town, laid out with a photo-driven grid, pull quotes, and a fact sidebar.",
+    techStack: ["InDesign", "Photoshop"],
+    startDate: new Date("2025-10-01"),
+    endDate: new Date("2025-10-01"),
+    // TODO: no raster preview image exists for this PDF-based project yet —
+    // export a PNG/JPG of a spread and swap it in here and in pagesInfoArr.
+    companyLogoImg: "/projects/national-magazine-spread/logo.png",
+    websiteLink: "/projects/national-magazine-spread/magazine-spread.pdf",
+    pagesInfoArr: [
+      {
+        title: "Editorial Spread — Coming Soon as Images",
+        description:
+          "A travel feature, '72 Hours in Cape Town,' laid out across multiple pages with a title spread, a photo-and-text grid for the day-by-day narrative, pull quotes, and a 'Cape Town Facts' sidebar. No image export exists yet — the document below is the real deliverable.",
+        documentArr: [
+          {
+            label: "Magazine Spread (PDF)",
+            href: "/projects/national-magazine-spread/magazine-spread.pdf",
+          },
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "An editorial layout project for a fictional 'National Magazine' travel feature on Cape Town, following a writer's three-day trip through the Cape Peninsula, Table Mountain, and the Cape Floral Kingdom. The brief was to take a long-form travel article and lay it out as a real magazine spread rather than a plain document.",
+        "The layout uses a multi-column grid to balance dense body copy against full-bleed photography, with pulled statistics and a dedicated facts sidebar to break up the reading rhythm. Running heads, folios, and a consistent type system carry the piece across multiple pages the way a printed feature would.",
+      ],
+      bullets: [
+        "Laid out a multi-page magazine feature with a title spread and running day-by-day sections.",
+        "Balanced photography and body copy across a multi-column editorial grid.",
+        "Designed supporting elements: pull quotes, a facts sidebar, and consistent running heads/folios.",
+      ],
+    },
+  },
+  {
+    id: "eventful-uiux",
+    companyName: "Eventful — UI/UX Design",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["UI/UX"],
+    shortDescription:
+      "The end-to-end UI/UX design of Eventful, an event-planning marketplace — desktop and mobile flows spanning discovery, service booking, reviews, cart/checkout, and account management.",
+    techStack: ["Material UI"],
+    startDate: new Date("2026-04-01"),
+    endDate: new Date("2026-04-01"),
+    companyLogoImg: "/projects/eventful-uiux/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Desktop Experience",
+        description:
+          "The full desktop flow: landing/hero and signup, browsing popular plans and categories, service detail pages with reviews and an add-review flow, filtering and search (including empty states), building a customized plan, cart and checkout (delivery address, payment method, confirmation), saved delivery locations, and a saved-plans/collections view.",
+        imgArr: [
+          "/projects/eventful-uiux/desktop_01.png",
+          "/projects/eventful-uiux/desktop_02.png",
+          "/projects/eventful-uiux/desktop_03.png",
+          "/projects/eventful-uiux/desktop_04.png",
+          "/projects/eventful-uiux/desktop_05.png",
+          "/projects/eventful-uiux/desktop_06.png",
+          "/projects/eventful-uiux/desktop_07.png",
+          "/projects/eventful-uiux/desktop_08.png",
+          "/projects/eventful-uiux/desktop_09.png",
+          "/projects/eventful-uiux/desktop_10.png",
+          "/projects/eventful-uiux/desktop_11.png",
+          "/projects/eventful-uiux/desktop_12.png",
+          "/projects/eventful-uiux/desktop_13.png",
+          "/projects/eventful-uiux/desktop_14.png",
+          "/projects/eventful-uiux/desktop_15.png",
+          "/projects/eventful-uiux/desktop_16.png",
+          "/projects/eventful-uiux/desktop_17.png",
+          "/projects/eventful-uiux/desktop_18.png",
+          "/projects/eventful-uiux/desktop_19.png",
+        ],
+      },
+      {
+        title: "Mobile Experience",
+        description:
+          "The same core flows adapted to mobile breakpoints across iOS and Android: search and empty states, a sign-in prompt gating cart/favorites, the account/profile screen with delete-account confirmation, service detail cards with date/time pickers, and the mobile filter panel.",
+        imgArr: [
+          "/projects/eventful-uiux/mobile_01.png",
+          "/projects/eventful-uiux/mobile_02.png",
+          "/projects/eventful-uiux/mobile_03.png",
+          "/projects/eventful-uiux/mobile_04.png",
+          "/projects/eventful-uiux/mobile_05.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This is the UI/UX side of Eventful, the event-planning marketplace I also built full-stack (see the Development Projects tab): the interface design across every core flow, on both desktop and mobile. Rather than a set of static mockups, these are the interfaces as actually implemented — the design system was built directly in code with Material UI rather than handed off from a separate design file.",
+        "The design covers the full user journey: a search-first landing page and signup, browsing popular plans and service categories, a detailed service page with photo carousels, reviews, and an add-review flow, filtering and search with a handled empty state, assembling a customized event plan from multiple services, and a three-step cart-to-checkout flow covering delivery address and payment method through to a confirmation state. Account management includes saved delivery locations and a destructive delete-account confirmation pattern.",
+        "The mobile adaptation isn't just a scaled-down layout — service detail cards restructure their date/time pickers for touch, the filter panel becomes a dedicated screen, and a sign-in prompt gates cart and favorites for guests, all while keeping the same visual language as the desktop experience.",
+      ],
+      bullets: [
+        "Designed the full desktop flow: landing, signup, browsing, service detail, reviews, cart, checkout, and saved locations.",
+        "Designed a matching responsive mobile experience across iOS and Android breakpoints.",
+        "Handled edge cases in the UI: empty search results, guest sign-in gating, and destructive-action confirmation.",
+        "Built the design system directly in Material UI rather than as a separate static mockup file.",
       ],
     },
   },
 ];
 
-export const featuredProjects = Projects.slice(0, 3);
+export const featuredProjects = Projects.filter(
+  (project) => !project.id.startsWith("placeholder-")
+).slice(0, 3);
