@@ -55,18 +55,30 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      form.reset();
-
       if (response.status === 200) {
+        form.reset();
         storeModal.onOpen({
           title: "Thankyou!",
           description:
             "Your message has been received! I appreciate your contact and will get back to you shortly.",
           icon: Icons.successAnimated,
         });
+      } else {
+        storeModal.onOpen({
+          title: "Message not sent",
+          description:
+            "Something went wrong sending your message. Please try again, or email me directly at elissaissa4@gmail.com.",
+          icon: Icons.warning,
+        });
       }
     } catch (err) {
       console.log("Err!", err);
+      storeModal.onOpen({
+        title: "Message not sent",
+        description:
+          "Something went wrong sending your message. Please try again, or email me directly at elissaissa4@gmail.com.",
+        icon: Icons.warning,
+      });
     }
   }
 

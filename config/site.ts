@@ -1,8 +1,7 @@
 export const siteConfig = {
   name: "Elissa Issa | Developer & Creative Portfolio",
   authorName: "Elissa Issa",
-  // TODO: replace with your actual GitHub/handle once you've decided on one.
-  username: "your-username",
+  username: "elissa-issa",
   tagline: "Multimedia and Software Engineer",
   description:
     "Elissa Issa's portfolio — a fifth-year Computer and Communications Engineering (Multimedia) student proficient in full-stack web development, especially front-end and design.",
@@ -16,10 +15,9 @@ export const siteConfig = {
   // TODO: replace with your actual deployed domain.
   url: "https://example.com",
   links: {
-    // TODO: replace with your real TikTok profile URL.
-    tiktok: "https://tiktok.com/@yourusername",
-    // TODO: add your GitHub profile URL.
-    github: "#",
+    tiktok: "https://www.tiktok.com/@elissaisssa",
+    github: "https://github.com/elissa-issa",
+    linkedin: "https://www.linkedin.com/in/elissa-issa-aaa130304",
   },
   // TODO: replace with your own photo/screenshot for social share previews
   // (the template's own profile-img.jpg was removed — it belonged to the

@@ -114,8 +114,7 @@ export default function IndexPage() {
 
           <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
             <AnimatedText delay={0.6}>
-              {/* TODO: drop your CV as public/cv/resume.pdf — this link
-                  already points there. */}
+              {/* CV lives at public/cv/resume.pdf */}
               <Link
                 href="/cv/resume.pdf"
                 target="_blank"

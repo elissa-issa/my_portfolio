@@ -27,12 +27,15 @@ import {
   Pizza,
   Plus,
   ScanLine,
+  Scissors,
   Scroll,
   Settings,
   Sparkles,
   SunMedium,
   Trash,
   User,
+  Video,
+  Waves,
   X,
   Zap,
 } from "lucide-react";
@@ -52,7 +55,9 @@ import {
   SiAdobephotoshop,
   SiAmazonaws,
   SiAngular,
+  SiAutodesk,
   SiBootstrap,
+  SiCanva,
   SiCplusplus,
   SiCsharp,
   SiCss3,
@@ -182,6 +187,11 @@ export const Icons = {
   gridfs: Database,
   unity: SiUnity,
   gemini: Sparkles,
+  canva: SiCanva,
+  autodesk: SiAutodesk,
+  capcut: Scissors,
+  studioOne: Waves,
+  vegasPro: Video,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

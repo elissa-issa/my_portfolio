@@ -80,7 +80,12 @@ export type ValidSkills =
   | "Jupyter"
   | "GridFS"
   | "Unity"
-  | "Google Gemini";
+  | "Google Gemini"
+  | "Studio One"
+  | "Vegas Pro"
+  | "Canva"
+  | "CapCut"
+  | "3ds Max";
 
 export type ValidCategory =
   | "Full Stack"

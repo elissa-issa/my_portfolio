@@ -338,6 +338,41 @@ export const skillsUnsorted: skillsInterface[] = [
     rating: 3,
     icon: Icons.gemini,
   },
+  {
+    name: "3ds Max",
+    description:
+      "Model, texture, light, and render detailed 3D interior and exterior scenes.",
+    rating: 3,
+    icon: Icons.autodesk,
+  },
+  {
+    name: "Studio One",
+    description:
+      "Record, mix, and master audio for original sound design and film scoring.",
+    rating: 3,
+    icon: Icons.studioOne,
+  },
+  {
+    name: "Vegas Pro",
+    description:
+      "Edit and assemble video projects, from raw footage to a finished cut.",
+    rating: 3,
+    icon: Icons.vegasPro,
+  },
+  {
+    name: "Canva",
+    description:
+      "Design social graphics, invitations, and marketing collateral with a fast, template-driven tool.",
+    rating: 4,
+    icon: Icons.canva,
+  },
+  {
+    name: "CapCut",
+    description:
+      "Cut, caption, and polish short-form video content for social and personal projects.",
+    rating: 4,
+    icon: Icons.capcut,
+  },
 ];
 
 export const skills = skillsUnsorted

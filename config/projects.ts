@@ -53,6 +53,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "bitecheck",
     companyName: "BiteCheck",
+    githubLink: "https://github.com/elissa-issa/food-product-analyzer",
     type: "Personal",
     portfolioCategory: "development",
     category: ["Mobile Dev", "Full Stack", "Backend"],
@@ -269,6 +270,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "eventful",
     companyName: "Eventful",
+    githubLink: "https://github.com/elissa-issa/Eventful",
     type: "Personal",
     portfolioCategory: "development",
     category: ["Full Stack", "Web Dev", "AI/ML"],
@@ -314,20 +316,23 @@ export const Projects: ProjectInterface[] = [
     },
   },
   {
-    id: "3d-diner",
-    companyName: "Retro Diner — 3D Interior",
+    id: "3d-projects",
+    companyName: "3D Projects",
     type: "Personal",
     portfolioCategory: "creative",
     category: ["3D Modeling"],
     shortDescription:
-      "A stylized 1950s-style diner interior — red vinyl booths, a curved counter, and pendant lighting, modeled and furnished from an empty shell.",
-    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
-    // so I can tag it correctly here and in the skills list.
-    techStack: [],
+      "A collection of three 3D interior/exterior modeling projects — a retro 1950s diner, a home bar & lounge with prop studies, and a modern pool villa — modeled and rendered from empty shell to fully furnished scenes.",
+    techStack: ["3ds Max"],
     startDate: new Date("2026-01-01"),
-    endDate: new Date("2026-01-01"),
-    companyLogoImg: "/projects/3d-diner/logo.png",
+    endDate: new Date("2026-03-01"),
+    companyLogoImg: "/projects/3d-modern-villa/render_3.jpg",
     pagesInfoArr: [
+      {
+        title: "Retro Diner — 3D Interior",
+        description:
+          "A stylized 1950s-style diner interior — red vinyl booths, a curved counter, and pendant lighting, modeled and furnished from an empty shell.",
+      },
       {
         title: "Interior Renders",
         description:
@@ -339,32 +344,11 @@ export const Projects: ProjectInterface[] = [
           "/projects/3d-diner/render_4.jpg",
         ],
       },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "A 3D interior modeling piece imagining a retro diner: red booth seating, round tables and chairs, a curved service counter stocked with glassware and condiments, and pendant lamps hung over each booth. The brief was to design a cohesive, inviting food-service space from empty shell to fully furnished room.",
-      ],
-      bullets: [
-        "Modeled and arranged a full diner interior: booths, tables, chairs, counter, and lighting.",
-        "Composed multiple camera angles to showcase the space from overview and detail perspectives.",
-      ],
-    },
-  },
-  {
-    id: "3d-house-lounge",
-    companyName: "Home Bar & Lounge — 3D Interior",
-    type: "Personal",
-    portfolioCategory: "creative",
-    category: ["3D Modeling"],
-    shortDescription:
-      "A home bar and lounge concept — a curved bar counter beneath a spiral staircase, a bedroom nook, and standalone furniture/prop studies.",
-    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
-    // so I can tag it correctly here and in the skills list.
-    techStack: [],
-    startDate: new Date("2026-02-01"),
-    endDate: new Date("2026-02-01"),
-    companyLogoImg: "/projects/3d-house-lounge/logo.png",
-    pagesInfoArr: [
+      {
+        title: "Home Bar & Lounge — 3D Interior",
+        description:
+          "A home bar and lounge concept — a curved bar counter beneath a spiral staircase, a bedroom nook, and standalone furniture/prop studies.",
+      },
       {
         title: "Home Bar",
         description:
@@ -386,33 +370,11 @@ export const Projects: ProjectInterface[] = [
           "/projects/3d-house-lounge/render_7.jpg",
         ],
       },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "A set of interior scenes and prop studies built around a home bar and lounge concept: a curved bar counter beneath a spiral staircase, a bedroom desk nook, a low-poly armchair, and individual object studies like a ceramic vase and a smoking pipe. The project mixes full-room composition with focused single-object modeling.",
-      ],
-      bullets: [
-        "Modeled a curved home bar counter, spiral staircase, and stocked bar props (bottles, glassware, fruit bowl).",
-        "Composed a bedroom desk and seating nook with furniture and decor.",
-        "Modeled standalone props — an armchair and a smoking pipe — as individual studies.",
-      ],
-    },
-  },
-  {
-    id: "3d-modern-villa",
-    companyName: "Modern Pool Villa — 3D Exterior",
-    type: "Personal",
-    portfolioCategory: "creative",
-    category: ["3D Modeling"],
-    shortDescription:
-      "A modern villa exterior and rooftop concept — a pool wrapping a glass-walled pavilion, timber screening, and an open-plan interior living space.",
-    // TODO: tell me which 3D tool you used (Blender, SketchUp, 3ds Max...)
-    // so I can tag it correctly here and in the skills list.
-    techStack: [],
-    startDate: new Date("2026-03-01"),
-    endDate: new Date("2026-03-01"),
-    companyLogoImg: "/projects/3d-modern-villa/logo.png",
-    pagesInfoArr: [
+      {
+        title: "Modern Pool Villa — 3D Exterior",
+        description:
+          "A modern villa exterior and rooftop concept — a pool wrapping a glass-walled pavilion, timber screening, and an open-plan interior living space.",
+      },
       {
         title: "Exterior & Rooftop",
         description:
@@ -436,9 +398,17 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
+        "3D Projects brings together three standalone 3D modeling pieces — a retro diner, a home bar & lounge, and a modern pool villa — each one an exercise in taking a space from an empty shell to a fully furnished, rendered scene.",
+        "A 3D interior modeling piece imagining a retro diner: red booth seating, round tables and chairs, a curved service counter stocked with glassware and condiments, and pendant lamps hung over each booth. The brief was to design a cohesive, inviting food-service space from empty shell to fully furnished room.",
+        "A set of interior scenes and prop studies built around a home bar and lounge concept: a curved bar counter beneath a spiral staircase, a bedroom desk nook, a low-poly armchair, and individual object studies like a ceramic vase and a smoking pipe. The project mixes full-room composition with focused single-object modeling.",
         "A modern villa exterior and rooftop concept: a pool wrapping around a glass-walled living pavilion, slatted timber privacy screens, a shaded outdoor dining set, and lounge seating under umbrellas. Paired with an interior pass at the open-plan living space beneath the pitched glass roof.",
       ],
       bullets: [
+        "Modeled and arranged a full diner interior: booths, tables, chairs, counter, and lighting.",
+        "Composed multiple camera angles to showcase the space from overview and detail perspectives.",
+        "Modeled a curved home bar counter, spiral staircase, and stocked bar props (bottles, glassware, fruit bowl).",
+        "Composed a bedroom desk and seating nook with furniture and decor.",
+        "Modeled standalone props — an armchair and a smoking pipe — as individual studies.",
         "Modeled a two-story villa exterior with a wraparound infinity-style pool and timber screening.",
         "Furnished rooftop dining and lounge areas with tables, chairs, sun loungers, and umbrellas.",
         "Modeled the open-plan interior living space with modular sofas and lighting under the glass roof.",
@@ -456,9 +426,6 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Adobe Illustrator", "InDesign", "Photoshop"],
     startDate: new Date("2025-11-01"),
     endDate: new Date("2025-11-01"),
-    // TODO: no raster preview image exists for this PDF-based project yet —
-    // export a PNG/JPG of a key page (e.g. the logo or color palette) and
-    // swap it in here and in pagesInfoArr below.
     companyLogoImg: "/projects/sundaeinbeirut/logo.png",
     websiteLink: "/projects/sundae-in-beirut/brand-guidelines.pdf",
     pagesInfoArr: [
@@ -509,8 +476,6 @@ export const Projects: ProjectInterface[] = [
     techStack: ["InDesign", "Photoshop"],
     startDate: new Date("2025-10-01"),
     endDate: new Date("2025-10-01"),
-    // TODO: no raster preview image exists for this PDF-based project yet —
-    // export a PNG/JPG of a spread and swap it in here and in pagesInfoArr.
     companyLogoImg: "/projects/national-magazine-spread/logo.png",
     websiteLink: "/projects/national-magazine-spread/magazine-spread.pdf",
     pagesInfoArr: [
@@ -601,6 +566,73 @@ export const Projects: ProjectInterface[] = [
         "Designed a matching responsive mobile experience across iOS and Android breakpoints.",
         "Handled edge cases in the UI: empty search results, guest sign-in gating, and destructive-action confirmation.",
         "Built the design system directly in Material UI rather than as a separate static mockup file.",
+      ],
+    },
+  },
+  {
+    id: "sound-and-audiovisuals",
+    companyName: "Sound & Audiovisuals",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["Audiovisual"],
+    shortDescription:
+      "A short film I created entirely on my own — handling both the audio production/mixing in Studio One and the video editing/assembly in Vegas Pro from start to finish.",
+    techStack: ["Studio One", "Vegas Pro"],
+    startDate: new Date("2026-05-01"),
+    endDate: new Date("2026-05-01"),
+    companyLogoImg: "/projects/sound-and-audiovisuals/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Short Film",
+        description:
+          "A short film I wrote, shot, and finished entirely by myself. I handled the sound design and full audio mix in Studio One, then assembled and edited the picture in Vegas Pro, taking the project from raw footage and audio to a finished cut without outside help on either the sound or the edit.",
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Sound & Audiovisuals covers a short film I made entirely on my own, from concept through final export. On the audio side, I used Studio One to record, edit, and mix the film's sound — dialogue, sound design, and any music — into a finished soundtrack.",
+        "On the picture side, I used Vegas Pro to edit and assemble the footage: cutting the shots together, syncing them to the audio mix, and handling color and pacing to bring the whole film together as a single, polished piece. Doing both the audio and video work myself meant owning the entire post-production pipeline for the film, end to end.",
+      ],
+      bullets: [
+        "Recorded, edited, and mixed the film's full audio (sound design and dialogue/music) in Studio One.",
+        "Edited and assembled the film's picture, from raw footage to a finished cut, in Vegas Pro.",
+        "Handled the entire audiovisual post-production process independently, from sound to picture.",
+      ],
+    },
+  },
+  {
+    id: "editing",
+    companyName: "Editing",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["Video/Photo Editing"],
+    shortDescription:
+      "A birthday invitation and matching thank-you card designed in Canva, with final touch-ups and export polish done in CapCut.",
+    techStack: ["Canva", "CapCut"],
+    startDate: new Date("2026-07-01"),
+    endDate: new Date("2026-07-01"),
+    companyLogoImg: "/projects/editing/invitation_1.png",
+    pagesInfoArr: [
+      {
+        title: "Birthday Invitation Design",
+        description:
+          "A beige-and-gold minimalist birthday invitation set, including a matching thank-you card, laid out in Canva with hand-drawn party illustrations and custom event details, then finished and exported with CapCut.",
+        imgArr: [
+          "/projects/editing/invitation_1.png",
+          "/projects/editing/invitation_2.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Editing covers the design and video work I create using Canva, CapCut, and other editing tools — spanning presentations, invitations and cards, book layouts, and short-form marketing content. In Canva, I design a wide range of materials, from event pieces like a beige-and-gold minimalist birthday invitation and matching thank-you card, to presentation decks and book/document layouts, always paying close attention to consistent typography, color, and visual identity across each set.",
+        "On the video side, I use CapCut alongside other editing tools to produce short-form content, including marketing videos for platforms like TikTok and other social channels. This covers the full editing process — sound syncing, transitions, stickers and text overlays, pacing, and export — to turn raw footage into polished, ready-to-post content.",
+      ],
+      bullets: [
+        "Designed a range of Canva projects including presentations, invitations and cards, and book/document layouts.",
+        "Created a matching birthday invitation and thank-you card set as one example, using a consistent beige-and-gold minimalist style.",
+        "Edited short-form marketing videos for TikTok and other social platforms using CapCut.",
+        "Handled full video editing workflows including sound syncing, stickers, transitions, and text overlays.",
       ],
     },
   },
