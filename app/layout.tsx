@@ -96,9 +96,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID;
-  // Analytics is optional: without an ID the site works and simply skips GA.
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -129,7 +126,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ModalProvider />
         </ThemeProvider>
       </body>
-      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }
