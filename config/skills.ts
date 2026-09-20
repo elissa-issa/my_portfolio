@@ -339,6 +339,13 @@ export const skillsUnsorted: skillsInterface[] = [
     icon: Icons.gemini,
   },
   {
+    name: "JavaFX",
+    description:
+      "Build rich desktop applications in Java with scenes, controls, and event-driven UIs.",
+    rating: 3,
+    icon: Icons.java,
+  },
+  {
     name: "3ds Max",
     description:
       "Model, texture, light, and render detailed 3D interior and exterior scenes.",

@@ -85,7 +85,8 @@ export type ValidSkills =
   | "Vegas Pro"
   | "Canva"
   | "CapCut"
-  | "3ds Max";
+  | "3ds Max"
+  | "JavaFX";
 
 export type ValidCategory =
   | "Full Stack"

@@ -72,6 +72,17 @@ export default function Project({ params }: ProjectPageProps) {
           </div>
         </h1>
         <ChipContainer textArr={project.category} />
+        {project.websiteLink?.startsWith("http") && (
+          <Link
+            href={project.websiteLink}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(buttonVariants({ variant: "default" }), "mt-4")}
+          >
+            <Icons.externalLink className="w-4 h-4 mr-2" />
+            Visit Live Website
+          </Link>
+        )}
         <div className="mt-4 flex space-x-4">
           <Link
             href={siteConfig.links.github}

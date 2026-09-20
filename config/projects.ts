@@ -50,6 +50,125 @@ export interface ProjectInterface {
 }
 
 export const Projects: ProjectInterface[] = [
+    {
+    id: "eventful",
+    companyName: "Eventful",
+    githubLink: "https://github.com/elissa-issa/Eventful",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Full Stack", "Web Dev", "AI/ML"],
+    shortDescription:
+      "A full-stack event-planning marketplace for browsing venues, menus, decorations, and entertainment, saving collections, checking out orders, and generating catalog-grounded AI event plans with Google Gemini.",
+    techStack: [
+      "React",
+      "Vite",
+      "React Router",
+      "Material UI",
+      "express.js",
+      "MongoDB",
+      "Mongoose",
+      "Google Gemini",
+    ],
+    startDate: new Date("2026-08-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg: "/projects/eventful/screen_01.png",
+    pagesInfoArr: [
+      {
+        title: "Home & Discovery",
+        description:
+          "A landing page with a rotating hero banner and a search bar for where, when, and who, followed by carousels of the most popular plans (Birthday Party, Prom Night, Christmas Dinner) with View Plan and Add to Cart actions, service categories, a customize call to action, and a partners carousel.",
+        imgArr: [
+          "/projects/eventful/screen_01.png",
+          "/projects/eventful/screen_02.png",
+          "/projects/eventful/screen_03.png",
+        ],
+      },
+      {
+        title: "Services Catalog & Filters",
+        description:
+          "Browsable service tabs for bundles, venues, menus, decorations, and entertainment, with badges like Vegan, Live station, and Premium, and a filter panel for price range, location, category, vegan-only options, and quantity.",
+        imgArr: [
+          "/projects/eventful/screen_04.png",
+          "/projects/eventful/screen_05.png",
+        ],
+      },
+      {
+        title: "Authentication",
+        description:
+          "A login screen with email and password, a stay-logged-in option, forgot password, Google and Facebook sign-in buttons, and a link to create an account.",
+        imgArr: [
+          "/projects/eventful/screen_06.png",
+        ],
+      },
+      {
+        title: "Profile & Saved Locations",
+        description:
+          "A profile page with editable basic info, an order history with item status and totals, and saved delivery locations shown on a map, with options to add, edit, or delete them.",
+        imgArr: [
+          "/projects/eventful/screen_07.png",
+          "/projects/eventful/screen_08.png",
+        ],
+      },
+      {
+        title: "My Customized Plans",
+        description:
+          "A view of the user's saved customized plans, each showing a photo collage, item count, and View Plan and Delete actions, alongside a card to create a new plan.",
+        imgArr: [
+          "/projects/eventful/screen_09.png",
+        ],
+      },
+      {
+        title: "Vendors",
+        description:
+          "A vendor directory to discover venues and other vendors, with search, filters, and View Items and Contact Vendor actions. Contacting vendors directly is gated behind a premium upgrade prompt.",
+        imgArr: [
+          "/projects/eventful/screen_10.png",
+          "/projects/eventful/screen_11.png",
+        ],
+      },
+      {
+        title: "Service Detail & Reviews",
+        description:
+          "A service page with an image gallery, rating, price per piece, quantity, and estimated total, date and time pickers, and a Save Changes action, plus customer reviews with star ratings.",
+        imgArr: [
+          "/projects/eventful/screen_12.png",
+          "/projects/eventful/screen_13.png",
+        ],
+      },
+      {
+        title: "Cart & Checkout",
+        description:
+          "A multi-step cart flow (cart, delivery address, payment method) listing selected services with dates, times, and quantities, favorite and remove actions, and an order summary with retail price, promotions, and total.",
+        imgArr: [
+          "/projects/eventful/screen_14.png",
+        ],
+      },
+      {
+        title: "AI Event Planner",
+        description:
+          "The premium AI planner, where the user describes an event in plain language and receives a plan built from real catalog services: a title, description, recommended venues, entertainment, and menus with prices, an estimated total, and planning tips, with options to save it as a customized plan or add items to a collection.",
+        imgArr: [
+          "/projects/eventful/screen_15.png",
+          "/projects/eventful/screen_16.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Eventful is a full-stack event-planning marketplace where users can browse and book real event services — venues, catering menus, decorations, entertainment, and prebuilt bundles — then save favorites, build collections or fully customized plans, check delivery locations, check out orders, and leave reviews. I built the frontend as a React and Vite single-page app with Material UI and React Router, and the backend as an Express REST API on MongoDB via Mongoose, with custom Bearer-token authentication (HMAC-signed tokens, PBKDF2 password hashing) instead of pulling in a full auth framework.",
+        "The part I'm most proud of is the premium AI planner. Rather than letting an LLM freely invent event suggestions, the backend loads the real venues, menus, decorations, entertainment, and bundles currently in MongoDB, sends that catalog together with the user's prompt to Google Gemini (gemini-2.5-flash), and requires a structured JSON response. Every recommended item is then validated against the actual service catalog before it's returned, so the plan the user sees is grounded in bookable services rather than hallucinated ones — and premium-gated on both the frontend and backend.",
+        "Beyond the AI feature, the backend handles a fair amount of real marketplace logic: checkout with quantity and payment-method validation, promotion/price calculation, venue and entertainment availability checks against existing orders to prevent double-booking, and review eligibility tied to whether a user actually has a paid/delivered order for that service. Carts, collections, and customized plans store service IDs alongside lightweight snapshots so saved items stay meaningful even if the underlying catalog changes.",
+      ],
+      bullets: [
+        "Built a React/Vite SPA with protected routes, a reusable service catalog UI, search, favorites, collections, cart, checkout, and profile flows.",
+        "Designed an Express REST API with controllers, middleware, and centralized error handling over Mongoose models.",
+        "Modeled a full marketplace schema in MongoDB: users, services, bundles, carts, collections, customized plans, orders, reviews, and saved locations.",
+        "Implemented custom Bearer-token authentication with PBKDF2 password hashing and per-user resource ownership checks.",
+        "Integrated Google Gemini for a premium AI event planner, grounding every recommendation in real catalog services and validating the model's output before returning it.",
+        "Added checkout logic with availability conflict detection, order creation, and review eligibility tied to completed orders.",
+      ],
+    },
+  },
   {
     id: "bitecheck",
     companyName: "BiteCheck",
@@ -268,50 +387,162 @@ export const Projects: ProjectInterface[] = [
     },
   },
   {
-    id: "eventful",
-    companyName: "Eventful",
-    githubLink: "https://github.com/elissa-issa/Eventful",
-    type: "Personal",
+    id: "bac-website",
+    companyName: "Beirut Annunciation College Website",
+    type: "Professional",
     portfolioCategory: "development",
-    category: ["Full Stack", "Web Dev", "AI/ML"],
+    category: ["Frontend", "Web Dev"],
     shortDescription:
-      "A full-stack event-planning marketplace for browsing venues, menus, decorations, and entertainment, saving collections, checking out orders, and generating catalog-grounded AI event plans with Google Gemini.",
-    techStack: [
-      "React",
-      "Vite",
-      "React Router",
-      "Material UI",
-      "express.js",
-      "MongoDB",
-      "Mongoose",
-      "Google Gemini",
-    ],
-    startDate: new Date("2026-08-01"),
-    endDate: new Date("2026-08-01"),
-    // TODO: no screenshots were provided yet — replace with a real cover
-    // image once you have one (see the note in pagesInfoArr below).
-    companyLogoImg: "/logo.png",
+      "The front-end of the Beirut Annunciation College website, designed in Figma and then fully built in React during my internship at the Orthodox Archdiocese of Beirut.",
+    techStack: ["React", "Figma", "Javascript", "HTML 5", "CSS 3"],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-09-01"),
+    websiteLink: "https://www.annunciationcollege.edu.lb/",
+    companyLogoImg: "/projects/bac/screen_5.png",
     pagesInfoArr: [
       {
-        title: "Screenshots & Demo — Coming Soon",
+        title: "Live Website",
         description:
-          "No screenshots were provided for this project yet, so this section uses a placeholder image — swap it for real screenshots of the marketplace, cart/checkout, and AI planner whenever you have them. Two local screen recordings exist (~130MB and ~92MB) but were intentionally left out of the repo: a single file that large exceeds GitHub's 100MB push limit. Host them externally (YouTube, Drive, etc.) and this project can link out to them, or compress them and add as videoArr like Castle Escape.",
-        imgArr: ["/logo.png"],
+          "The finished site is live at annunciationcollege.edu.lb.",
+      },
+      {
+        title: "UI/UX Design",
+        description:
+          "The Figma designs the front-end was built from: a division page with an about section and head-of-division quote card, a protocols listing with view-online and PDF download actions, a multi-step student application form, leadership message cards, and a news and events feed. The full design work is also shown in the BAC Website — UI/UX Design project in the Creative Projects tab.",
+        imgArr: [
+          "/projects/bac/screen_1.png",
+          "/projects/bac/screen_2.png",
+          "/projects/bac/screen_3.png",
+          "/projects/bac/screen_4.png",
+          "/projects/bac/screen_5.png",
+        ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "Eventful is a full-stack event-planning marketplace where users can browse and book real event services — venues, catering menus, decorations, entertainment, and prebuilt bundles — then save favorites, build collections or fully customized plans, check delivery locations, check out orders, and leave reviews. I built the frontend as a React and Vite single-page app with Material UI and React Router, and the backend as an Express REST API on MongoDB via Mongoose, with custom Bearer-token authentication (HMAC-signed tokens, PBKDF2 password hashing) instead of pulling in a full auth framework.",
-        "The part I'm most proud of is the premium AI planner. Rather than letting an LLM freely invent event suggestions, the backend loads the real venues, menus, decorations, entertainment, and bundles currently in MongoDB, sends that catalog together with the user's prompt to Google Gemini (gemini-2.5-flash), and requires a structured JSON response. Every recommended item is then validated against the actual service catalog before it's returned, so the plan the user sees is grounded in bookable services rather than hallucinated ones — and premium-gated on both the frontend and backend.",
-        "Beyond the AI feature, the backend handles a fair amount of real marketplace logic: checkout with quantity and payment-method validation, promotion/price calculation, venue and entertainment availability checks against existing orders to prevent double-booking, and review eligibility tied to whether a user actually has a paid/delivered order for that service. Carts, collections, and customized plans store service IDs alongside lightweight snapshots so saved items stay meaningful even if the underlying catalog changes.",
+        "The Beirut Annunciation College website was my main project during my internship as an Intern Software Developer at the Orthodox Archdiocese of Beirut (June 2024 – September 2024). I started with the UI/UX, designing the interface in Figma, and then fully developed the front-end myself in React.",
+        "Alongside the website, my internship also involved revising and updating legacy codebases to modern development standards. The design side of this project is documented separately in the Creative Projects tab.",
       ],
       bullets: [
-        "Built a React/Vite SPA with protected routes, a reusable service catalog UI, search, favorites, collections, cart, checkout, and profile flows.",
-        "Designed an Express REST API with controllers, middleware, and centralized error handling over Mongoose models.",
-        "Modeled a full marketplace schema in MongoDB: users, services, bundles, carts, collections, customized plans, orders, reviews, and saved locations.",
-        "Implemented custom Bearer-token authentication with PBKDF2 password hashing and per-user resource ownership checks.",
-        "Integrated Google Gemini for a premium AI event planner, grounding every recommendation in real catalog services and validating the model's output before returning it.",
-        "Added checkout logic with availability conflict detection, order creation, and review eligibility tied to completed orders.",
+        "Designed the site's UI/UX in Figma before development started.",
+        "Fully developed the site's front-end in React, from the design to a live website.",
+        "Delivered the live site at annunciationcollege.edu.lb.",
+      ],
+    },
+  },
+  {
+    id: "job-portal",
+    companyName: "Online Job Application Portal",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Full Stack", "Web Dev"],
+    shortDescription:
+      "A full-stack job platform built with Laravel and MySQL where users browse and apply to job offers, and employers post opportunities and track applications.",
+    techStack: ["HTML 5", "CSS 3", "Javascript", "MySQL", "Laravel", "PHP"],
+    // Approximate — based on the screenshot dates.
+    startDate: new Date("2025-05-01"),
+    endDate: new Date("2025-05-01"),
+    companyLogoImg: "/projects/job-portal/screen_1.png",
+    pagesInfoArr: [
+      {
+        title: "Browsing & Searching Job Offers",
+        description:
+          "A public offers page with keyword search across job titles and descriptions, plus category and location filters. Each listing card shows the title, date, location, salary, and a short description, with an Apply button.",
+        imgArr: [
+          "/projects/job-portal/screen_1.png",
+          "/projects/job-portal/screen_2.png",
+        ],
+      },
+      {
+        title: "Employer Dashboard — Creating & Managing Offers",
+        description:
+          "A logged-in employer view for posting new offers (title, description, date, salary, location, and category), with a history panel to see each posted offer's applicants, update it, or delete it.",
+        imgArr: [
+          "/projects/job-portal/screen_3.png",
+          "/projects/job-portal/screen_4.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "The Online Job Application Portal is a full-stack web platform I built with Laravel (PHP) and MySQL, using HTML, CSS, and JavaScript on the front end. Users sign up and log in to browse job offers, search and filter them, and apply. It connects job seekers with employers in one place.",
+        "On the other side, employers and admins can post new job opportunities, edit or remove them, and see who has applied to each one, so they can follow the status of every application. Offers are stored in MySQL with a title, description, date, salary, location, and category, which powers the search and filtering on the browsing page.",
+      ],
+      bullets: [
+        "Built user authentication with sign-up and login for job seekers and employers.",
+        "Built a job browsing page with keyword search and category and location filters.",
+        "Implemented job applications so users can apply directly from a listing.",
+        "Built an employer dashboard to post, update, and delete job offers.",
+        "Added an applicants view and application status tracking for each posted offer.",
+        "Modeled offers, users, and applications in MySQL through Laravel.",
+      ],
+    },
+  },
+  {
+    id: "javafx-app",
+    companyName: "JavaFX Desktop Application",
+    type: "Personal",
+    portfolioCategory: "development",
+    category: ["Full Stack"],
+    shortDescription:
+      "A large-scale JavaFX desktop app with admin and client roles, covering CRUD management of users, products, and orders, plus search, a shopping cart, order tracking, reviews, and reports.",
+    techStack: ["Java", "JavaFX"],
+    // Approximate — based on the screenshot dates.
+    startDate: new Date("2024-12-01"),
+    endDate: new Date("2024-12-01"),
+    companyLogoImg: "/projects/javafx-app/screen_1.png",
+    pagesInfoArr: [
+      {
+        title: "Sign Up & Login",
+        description:
+          "A sign-up form capturing first and last name, username, password, email, and address, with a login option, that sets up each user's account and role.",
+        imgArr: ["/projects/javafx-app/screen_7.png"],
+      },
+      {
+        title: "Product Catalog, Search & Reviews",
+        description:
+          "The client product listing with a live search box and a category filter, quantity controls, Add to Cart buttons, and a View Reviews window showing star ratings and comments for each product.",
+        imgArr: [
+          "/projects/javafx-app/screen_1.png",
+          "/projects/javafx-app/screen_2.png",
+          "/projects/javafx-app/screen_3.png",
+        ],
+      },
+      {
+        title: "Shopping Cart & Checkout",
+        description:
+          "A cart window with per-item quantities, remove and favorite actions, promo code entry with a discounted total, and checkout that places the order and generates a report.",
+        imgArr: [
+          "/projects/javafx-app/screen_4.png",
+          "/projects/javafx-app/screen_5.png",
+        ],
+      },
+      {
+        title: "Order Tracking",
+        description:
+          "An orders table showing each order's ID, cart, payment method, and creation time, with options to update the payment method or cancel an order after a confirmation prompt.",
+        imgArr: ["/projects/javafx-app/screen_6.png"],
+      },
+      {
+        title: "Admin — Promotions",
+        description:
+          "An admin form for adding promotions with a promo code, discount percentage, start and end dates, and an active flag, with a confirmation on success.",
+        imgArr: ["/projects/javafx-app/screen_8.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "The JavaFX Desktop Application is a large-scale desktop app I built in Java with JavaFX, structured around two roles. Admins manage the system, with full CRUD over users, products, and orders, along with promotions and reports. Clients use it as a storefront: they browse a product catalog, search and filter it, and read and leave reviews.",
+        "Clients add products to a shopping cart, apply promo codes, and check out. They can then track their orders, update the payment method, or cancel them, and each completed order generates a report. Splitting the app by role keeps the admin tools separate from the client shopping flow.",
+      ],
+      bullets: [
+        "Built a JavaFX desktop app with separate admin and client roles.",
+        "Implemented full CRUD management of users, products, and orders.",
+        "Added product search and category filtering.",
+        "Built a shopping cart with quantity controls, promo codes, and checkout.",
+        "Implemented order tracking with payment method updates and order cancellation.",
+        "Added a product review system with star ratings and comments.",
+        "Generated reports for completed orders.",
       ],
     },
   },
@@ -415,6 +646,112 @@ export const Projects: ProjectInterface[] = [
       ],
     },
   },
+    {
+    id: "eventful-uiux",
+    companyName: "Eventful — UI/UX Design",
+    type: "Personal",
+    portfolioCategory: "creative",
+    category: ["UI/UX"],
+    shortDescription:
+      "The end-to-end UI/UX design of Eventful, an event-planning marketplace — desktop and mobile flows spanning discovery, service booking, reviews, cart/checkout, and account management.",
+    techStack: ["Material UI"],
+    startDate: new Date("2026-04-01"),
+    endDate: new Date("2026-04-01"),
+    companyLogoImg: "/projects/eventful-uiux/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Desktop Experience",
+        description:
+          "The full desktop flow: landing/hero and signup, browsing popular plans and categories, service detail pages with reviews and an add-review flow, filtering and search (including empty states), building a customized plan, cart and checkout (delivery address, payment method, confirmation), saved delivery locations, and a saved-plans/collections view.",
+        imgArr: [
+          "/projects/eventful-uiux/desktop_01.png",
+          "/projects/eventful-uiux/desktop_02.png",
+          "/projects/eventful-uiux/desktop_03.png",
+          "/projects/eventful-uiux/desktop_04.png",
+          "/projects/eventful-uiux/desktop_05.png",
+          "/projects/eventful-uiux/desktop_06.png",
+          "/projects/eventful-uiux/desktop_07.png",
+          "/projects/eventful-uiux/desktop_08.png",
+          "/projects/eventful-uiux/desktop_09.png",
+          "/projects/eventful-uiux/desktop_10.png",
+          "/projects/eventful-uiux/desktop_11.png",
+          "/projects/eventful-uiux/desktop_12.png",
+          "/projects/eventful-uiux/desktop_13.png",
+          "/projects/eventful-uiux/desktop_14.png",
+          "/projects/eventful-uiux/desktop_15.png",
+          "/projects/eventful-uiux/desktop_16.png",
+          "/projects/eventful-uiux/desktop_17.png",
+          "/projects/eventful-uiux/desktop_18.png",
+          "/projects/eventful-uiux/desktop_19.png",
+        ],
+      },
+      {
+        title: "Mobile Experience",
+        description:
+          "The same core flows adapted to mobile breakpoints across iOS and Android: search and empty states, a sign-in prompt gating cart/favorites, the account/profile screen with delete-account confirmation, service detail cards with date/time pickers, and the mobile filter panel.",
+        imgArr: [
+          "/projects/eventful-uiux/mobile_01.png",
+          "/projects/eventful-uiux/mobile_02.png",
+          "/projects/eventful-uiux/mobile_03.png",
+          "/projects/eventful-uiux/mobile_04.png",
+          "/projects/eventful-uiux/mobile_05.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This is the UI/UX side of Eventful, the event-planning marketplace I also built full-stack (see the Development Projects tab): the interface design across every core flow, on both desktop and mobile. Rather than a set of static mockups, these are the interfaces as actually implemented — the design system was built directly in code with Material UI rather than handed off from a separate design file.",
+        "The design covers the full user journey: a search-first landing page and signup, browsing popular plans and service categories, a detailed service page with photo carousels, reviews, and an add-review flow, filtering and search with a handled empty state, assembling a customized event plan from multiple services, and a three-step cart-to-checkout flow covering delivery address and payment method through to a confirmation state. Account management includes saved delivery locations and a destructive delete-account confirmation pattern.",
+        "The mobile adaptation isn't just a scaled-down layout — service detail cards restructure their date/time pickers for touch, the filter panel becomes a dedicated screen, and a sign-in prompt gates cart and favorites for guests, all while keeping the same visual language as the desktop experience.",
+      ],
+      bullets: [
+        "Designed the full desktop flow: landing, signup, browsing, service detail, reviews, cart, checkout, and saved locations.",
+        "Designed a matching responsive mobile experience across iOS and Android breakpoints.",
+        "Handled edge cases in the UI: empty search results, guest sign-in gating, and destructive-action confirmation.",
+        "Built the design system directly in Material UI rather than as a separate static mockup file.",
+      ],
+    },
+  },
+  {
+    id: "bac-website-uiux",
+    companyName: "BAC Website — UI/UX Design",
+    type: "Professional",
+    portfolioCategory: "creative",
+    category: ["UI/UX"],
+    shortDescription:
+      "The UI/UX design for the Beirut Annunciation College website, created in Figma during my internship at the Orthodox Archdiocese of Beirut before building the front-end in React.",
+    techStack: ["Figma"],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-09-01"),
+    websiteLink: "https://www.annunciationcollege.edu.lb/",
+    companyLogoImg: "/projects/bac/screen_1.png",
+    pagesInfoArr: [
+      {
+        title: "UI/UX Design",
+        description:
+          "Figma designs for key pages of the school website: a division page with an about section and head-of-division quote card, a protocols listing with view-online and PDF download actions, a multi-step student application form, leadership message cards, and a news and events feed.",
+        imgArr: [
+          "/projects/bac/screen_1.png",
+          "/projects/bac/screen_2.png",
+          "/projects/bac/screen_3.png",
+          "/projects/bac/screen_4.png",
+          "/projects/bac/screen_5.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This is the UI/UX design phase of the Beirut Annunciation College website, which I worked on during my internship as an Intern Software Developer at the Orthodox Archdiocese of Beirut (June 2024 – September 2024). I designed the interface in Figma first, then used it as the blueprint for the front-end build (see the Development Projects tab).",
+        "The designs cover the site's main page types: a division page with an about section and a head-of-division quote card, a protocols page where each document can be viewed online or downloaded as a PDF, a multi-step student application form with a progress stepper, leadership message cards, and a news and events feed. The screens use placeholder text and imagery, and share one visual language built around a blue accent color and clear, readable typography.",
+      ],
+      bullets: [
+        "Designed the site's page layouts and components in Figma before development started.",
+        "Designed a multi-step student application form with a step-by-step progress indicator and dropdown fields.",
+        "Designed document listings with clear view-online and PDF download actions.",
+        "Designed news and events cards and leadership message cards with a consistent visual style.",
+      ],
+    },
+  },
   {
     id: "sundae-in-beirut",
     companyName: "Sundae in Beirut — Brand Identity",
@@ -500,72 +837,6 @@ export const Projects: ProjectInterface[] = [
         "Laid out a multi-page magazine feature with a title spread and running day-by-day sections.",
         "Balanced photography and body copy across a multi-column editorial grid.",
         "Designed supporting elements: pull quotes, a facts sidebar, and consistent running heads/folios.",
-      ],
-    },
-  },
-  {
-    id: "eventful-uiux",
-    companyName: "Eventful — UI/UX Design",
-    type: "Personal",
-    portfolioCategory: "creative",
-    category: ["UI/UX"],
-    shortDescription:
-      "The end-to-end UI/UX design of Eventful, an event-planning marketplace — desktop and mobile flows spanning discovery, service booking, reviews, cart/checkout, and account management.",
-    techStack: ["Material UI"],
-    startDate: new Date("2026-04-01"),
-    endDate: new Date("2026-04-01"),
-    companyLogoImg: "/projects/eventful-uiux/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Desktop Experience",
-        description:
-          "The full desktop flow: landing/hero and signup, browsing popular plans and categories, service detail pages with reviews and an add-review flow, filtering and search (including empty states), building a customized plan, cart and checkout (delivery address, payment method, confirmation), saved delivery locations, and a saved-plans/collections view.",
-        imgArr: [
-          "/projects/eventful-uiux/desktop_01.png",
-          "/projects/eventful-uiux/desktop_02.png",
-          "/projects/eventful-uiux/desktop_03.png",
-          "/projects/eventful-uiux/desktop_04.png",
-          "/projects/eventful-uiux/desktop_05.png",
-          "/projects/eventful-uiux/desktop_06.png",
-          "/projects/eventful-uiux/desktop_07.png",
-          "/projects/eventful-uiux/desktop_08.png",
-          "/projects/eventful-uiux/desktop_09.png",
-          "/projects/eventful-uiux/desktop_10.png",
-          "/projects/eventful-uiux/desktop_11.png",
-          "/projects/eventful-uiux/desktop_12.png",
-          "/projects/eventful-uiux/desktop_13.png",
-          "/projects/eventful-uiux/desktop_14.png",
-          "/projects/eventful-uiux/desktop_15.png",
-          "/projects/eventful-uiux/desktop_16.png",
-          "/projects/eventful-uiux/desktop_17.png",
-          "/projects/eventful-uiux/desktop_18.png",
-          "/projects/eventful-uiux/desktop_19.png",
-        ],
-      },
-      {
-        title: "Mobile Experience",
-        description:
-          "The same core flows adapted to mobile breakpoints across iOS and Android: search and empty states, a sign-in prompt gating cart/favorites, the account/profile screen with delete-account confirmation, service detail cards with date/time pickers, and the mobile filter panel.",
-        imgArr: [
-          "/projects/eventful-uiux/mobile_01.png",
-          "/projects/eventful-uiux/mobile_02.png",
-          "/projects/eventful-uiux/mobile_03.png",
-          "/projects/eventful-uiux/mobile_04.png",
-          "/projects/eventful-uiux/mobile_05.png",
-        ],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "This is the UI/UX side of Eventful, the event-planning marketplace I also built full-stack (see the Development Projects tab): the interface design across every core flow, on both desktop and mobile. Rather than a set of static mockups, these are the interfaces as actually implemented — the design system was built directly in code with Material UI rather than handed off from a separate design file.",
-        "The design covers the full user journey: a search-first landing page and signup, browsing popular plans and service categories, a detailed service page with photo carousels, reviews, and an add-review flow, filtering and search with a handled empty state, assembling a customized event plan from multiple services, and a three-step cart-to-checkout flow covering delivery address and payment method through to a confirmation state. Account management includes saved delivery locations and a destructive delete-account confirmation pattern.",
-        "The mobile adaptation isn't just a scaled-down layout — service detail cards restructure their date/time pickers for touch, the filter panel becomes a dedicated screen, and a sign-in prompt gates cart and favorites for guests, all while keeping the same visual language as the desktop experience.",
-      ],
-      bullets: [
-        "Designed the full desktop flow: landing, signup, browsing, service detail, reviews, cart, checkout, and saved locations.",
-        "Designed a matching responsive mobile experience across iOS and Android breakpoints.",
-        "Handled edge cases in the UI: empty search results, guest sign-in gating, and destructive-action confirmation.",
-        "Built the design system directly in Material UI rather than as a separate static mockup file.",
       ],
     },
   },
