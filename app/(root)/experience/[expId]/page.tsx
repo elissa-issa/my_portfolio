@@ -171,13 +171,25 @@ export default function ExperienceDetailPage({
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center sm:justify-end">
+                  <div className="flex flex-col items-center sm:items-end gap-3">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
                       {formatDateRange(
                         experience.startDate,
                         experience.endDate
                       )}
                     </span>
+                    {experience.websiteLink && (
+                      <Button size="sm" asChild>
+                        <Link
+                          href={experience.websiteLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Icons.externalLink className="mr-2 h-4 w-4" />
+                          View Project
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>

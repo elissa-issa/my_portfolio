@@ -11,6 +11,7 @@ export interface ExperienceInterface {
   achievements: string[];
   skills: ValidSkills[];
   companyUrl?: string;
+  websiteLink?: string;
   logo?: string;
 }
 
@@ -33,6 +34,7 @@ export const experiences: ExperienceInterface[] = [
       "Participated in agile workflows including daily stand-ups, sprint planning, and code reviews.",
     ],
     skills: ["React", "Node.js", "GraphQL", "Javascript"],
+    websiteLink: "https://app.bamptee.com/",
   },
   {
     id: "orthodox-archdiocese-beirut",
@@ -50,5 +52,6 @@ export const experiences: ExperienceInterface[] = [
       "Revised and updated legacy codebases to modern development standards.",
     ],
     skills: ["React", "Figma", "Javascript", "HTML 5", "CSS 3"],
+    websiteLink: "https://www.annunciationcollege.edu.lb/",
   },
 ];
